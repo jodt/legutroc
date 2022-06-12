@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = sequelize => {
   sequelize.define(
-    'userProduction',
+    'trades',
     {
       id: {
         allowNull: false,
@@ -10,26 +10,26 @@ module.exports = sequelize => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      userId: {
+      userProductionId_1: {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
-          model: 'users',
+          model: 'userProduction',
           key: 'id',
         },
       },
-      vegetableId: {
+      userProductionId_2: {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
-          model: 'vegetables',
+          model: 'userProduction',
           key: 'id',
         },
       },
     },
     {
       timestamps: false,
-      tableName: 'userProduction',
+      tableName: 'trades',
       freezeTableName: true,
     }
   );
