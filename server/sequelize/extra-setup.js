@@ -4,10 +4,15 @@ const applyExtraSetup = sequelize => {
   users.hasMany(userProduction, { onDelete: 'cascade' });
   vegetables.hasMany(userProduction, { onDelete: 'cascade' });
 
-  userProduction.belongsTo(users);
-  userProduction.belongsTo(vegetables);
+  userProduction.hasMany(trades, {
+    foreignKey: 'userProductionId_1',
+    onDelete: 'cascade',
+  });
 
-  trades.belongsTo(userProduction, { foreignKey: 'id', onDelete: 'cascade' });
+  userProduction.hasMany(trades, {
+    foreignKey: 'userProductionId_2',
+    onDelete: 'cascade',
+  });
 };
 
 module.exports = { applyExtraSetup };
