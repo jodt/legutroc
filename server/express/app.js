@@ -1,5 +1,24 @@
 const express = require('express');
+const morgan = require('morgan');
+
+const routers = {
+  users: require('./routes/users'),
+  vegetables: require('./routes/vegetables'),
+  userProduction: require('./routes/userProduction'),
+  trades: require('./routes/trades'),
+};
+
 const app = express();
+app.use(morgan('dev'));
+app.use(express.json());
+
+for (const [routerName, router] of Object.entries(routers)) {
+  app.use(`/api/${routerName}`, router);
+}
+
+app.get('/api/status', (req, res, next) => {
+  res.send({ status: 'OK' });
+});
 
 const PORT = process.env.PORT || 4000;
 

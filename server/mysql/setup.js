@@ -9,29 +9,32 @@ const reset = async () => {
         firstName: 'Philippe',
         lastName: 'Willot',
         email: '3684@holbertonschool.com',
-        password: 'test1234',
-        city: 'Beuvrages',
+        password: 'dfkdsfsd87Df',
+        city: 'Valenciennes',
       },
       {
         firstName: 'Joël',
         lastName: 'Dumortier',
         email: '3233@holbertonschool.com',
-        password: 'motdepasse',
+        password: 'ieozj48dss6',
         city: 'Béthune',
       },
       {
         firstName: 'John',
         lastName: 'Doe',
-        email: '323@holbertonschool.com',
-        password: 'fdfdf',
+        email: 'john.doe@dohn.com',
+        password: 'ozajezf599dza5',
         city: 'Paris',
       },
     ]);
 
     await sequelize.models.vegetables.bulkCreate([
-      { name: 'Apple' },
-      { name: 'Orange' },
-      { name: 'Banana' },
+      { name: 'Broccoli' },
+      { name: 'Pommes de terre' },
+      { name: 'Tomate' },
+      { name: 'Chou' },
+      { name: 'Poivron' },
+      { name: 'Endive' },
     ]);
 
     await sequelize.models.userProduction.bulkCreate([
