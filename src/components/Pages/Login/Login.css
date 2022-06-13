@@ -1,0 +1,98 @@
+.loginPage {
+    min-height: 100vh;
+    text-align: center;
+    background-color: #74c999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #434343;
+    background-image: url('pngegg.png');
+    background-repeat: no-repeat;
+    background-position:bottom;
+    background-size:70rem;
+  }
+  
+  .loginHeader {
+    height: 200px;
+    background-color: #74c999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: #434343;
+  }
+
+.login {
+    margin: auto;
+    height: 350px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+    background-color: hwb(0 100% 0% / 0.765);
+    border-radius: 25% 10%;
+    box-shadow: 10px 20px 80px #4c8665;
+
+}
+
+form{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+input {
+    border: none;
+    margin: 20px 0;
+    height: 15%;
+    width: 60%;
+    font-size: 1.2rem;
+    box-shadow:15px 10px 30px #98989848;
+    border-radius: 100px;
+    text-align: center;
+}
+
+input[type=email]:focus, input[type=password]:focus{
+    outline-style: none;
+}
+input[type=email]:valid, input[type=password]:valid{
+    border: solid 2px #a6fcca;
+}
+
+::placeholder{
+    font-size: 1.2rem;
+    color: #434343;
+    text-align: center;
+}
+.button{
+    font-size: 1.2rem;
+    background-color: #a6fcca;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
+.button:hover{
+    opacity: 0.8;
+}
+
+form:invalid input[type="submit"]{
+    opacity: 0.5;
+}
+.registerLink{
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    color: #434343;
+    margin-bottom: 30px;
+}
+.registerLink:hover{
+
+    opacity: 0.8;
+}

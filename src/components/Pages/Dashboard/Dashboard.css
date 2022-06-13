@@ -1,0 +1,78 @@
+.Dashboard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #74c999;
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #434343;
+  }
+  
+  .Dashboard h1 {
+    font-size: calc(1.5rem + 2vmin);
+    margin: 4rem;
+  }
+  
+  .DashboardHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .Dashboard .body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .Dashboard .body .DashboardlPanel{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-right: 30px;
+    width: 60%;
+    height: 80vh;
+    border-radius: 50px;
+  }
+  .Dashboard .body .Menu{
+    content:"";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-left: 30px;
+    width: 30%;
+    height: 30vh;
+    border-radius: 50px;
+  }
+  .title {
+    width: 100%;
+    font-size: calc(0.5rem + 1vmin);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%
+  }
+  .maProduction{
+    margin-left: 6%;
+  }
+  .mesPropositions{
+    margin-right: 35%;
+  }
+  
+  .menuButton {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #434343;
+    text-align: center;
+    width: 60%;
+    height: 15%;
+    margin: 30px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(251, 251, 251);
+    border-radius: 50px;
+    
+  }
+  
