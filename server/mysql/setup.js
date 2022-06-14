@@ -1,6 +1,6 @@
 const sequelize = require('../sequelize');
 
-const reset = async () => {
+(async () => {
   try {
     await sequelize.sync({ force: true });
 
@@ -50,6 +50,4 @@ const reset = async () => {
   } catch (err) {
     console.error(err);
   }
-};
-
-reset();
+})();

@@ -78,12 +78,16 @@ userRouter.post('/', async (req, res, next) => {
   }
 });
 
-userRouter.put('/:id/password', (req, res, next) => {
-  res.status(200).send();
+userRouter.put('/:id/password', async (req, res, next) => {
+  res.status(200).send({
+    userUpdated: await models.users.findOne({ where: { id: req.params.id } }),
+  });
 });
 
-userRouter.put('/:id/city', (req, res, next) => {
-  res.status(200).send();
+userRouter.put('/:id/city', async (req, res, next) => {
+  res.status(200).send({
+    userUpdated: await models.users.findOne({ where: { id: req.params.id } }),
+  });
 });
 
 userRouter.delete('/:id', async (req, res, next) => {

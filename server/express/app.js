@@ -20,6 +20,8 @@ app.get('/api/status', (req, res, next) => {
   res.send({ status: 'OK' });
 });
 
+// /!\ Route de connexion (vérifier email et mot de passe)
+
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
