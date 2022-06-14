@@ -7,15 +7,16 @@ const userRouter = express.Router();
 // Checking if the user exists
 userRouter.use('/:id', async (req, res, next) => {
   try {
-    var id = getIdParam(req);
-  } catch (err) {}
-
-  const user = await models.users.findByPk(id);
-  if (user) {
-    req.user = user;
-    next();
-  } else {
-    res.status(404).send({ status: 'User not found' });
+    const id = getIdParam(req, res);
+    const user = await models.users.findByPk(id);
+    if (user) {
+      req.user = user;
+      next();
+    } else {
+      res.status(404).send({ message: 'User not found' });
+    }
+  } catch (err) {
+    res.status(400).send({ message: `Invalid id param` });
   }
 });
 
@@ -27,13 +28,13 @@ userRouter.use('/:id/*', async (req, res, next) => {
   if (!(dataToUpdate in req.body)) {
     return res
       .status(400)
-      .send({ status: `missing ${dataToUpdate} in the body` });
+      .send({ message: `missing ${dataToUpdate} in the body` });
   }
 
   if (user.dataValues[dataToUpdate] === req.body[dataToUpdate]) {
     return res
       .status(400)
-      .send({ status: `You can't use your previous ${dataToUpdate}` });
+      .send({ message: `You can't use your previous ${dataToUpdate}` });
   } else {
     try {
       const dataObject = {};
@@ -49,11 +50,32 @@ userRouter.use('/:id/*', async (req, res, next) => {
 });
 
 userRouter.get('/', async (req, res, next) => {
-  res.send({ users: await models.users.findAll() });
+  res.status(200).send({ users: await models.users.findAll() });
 });
 
 userRouter.get('/:id', (req, res, next) => {
-  res.send({ user: req.user });
+  res.status(200).send({ user: req.user });
+});
+
+userRouter.post('/', async (req, res, next) => {
+  try {
+    const user = await models.users.findOne({
+      where: { email: req.body.email },
+    });
+    if (user) {
+      return res.status(400).send({ message: 'This email is already used' });
+    }
+    const newUser = await models.users.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      city: req.body.city,
+    });
+    res.status(201).send({ newUser });
+  } catch (err) {
+    res.status(400).send({ message: 'Email is required' });
+  }
 });
 
 userRouter.put('/:id/password', (req, res, next) => {
@@ -66,11 +88,7 @@ userRouter.put('/:id/city', (req, res, next) => {
 
 userRouter.delete('/:id', async (req, res, next) => {
   try {
-    await models.users.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
+    await req.user.destroy();
     res.status(204).send();
   } catch (err) {
     console.error(err);
