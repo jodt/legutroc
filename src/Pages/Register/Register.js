@@ -4,7 +4,7 @@ import './Register.css';
 
 export function Register() {
   const [profile, setProfile] = useState({
-    name: '',
+    lastName: '',
     firstName: '',
     city: '',
     email: '',
@@ -19,10 +19,15 @@ export function Register() {
     }));
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(profile);
+  };
+
   const formFields = [
     {
       id: 'name',
-      name: 'name',
+      name: 'lastName',
       label: 'Nom :',
       type: 'text',
       value: profile.name,
@@ -78,7 +83,7 @@ export function Register() {
     <div className="register">
       <h1>Créer un compte et commencer à partager vos produits</h1>
       <div className="formBox">
-        <Form label={true} formFields={formFields} />
+        <Form label={true} formFields={formFields} onSubmit={handleSubmit} />
       </div>
     </div>
   );

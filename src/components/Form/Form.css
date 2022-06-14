@@ -25,13 +25,9 @@ input:valid {
   border: solid 2px #a6fcca;
 }
 
-::placeholder {
-  color: #434343;
-  font-size: 1.2rem;
-  text-align: center;
-}
 input[type='submit'] {
   font-size: 1.2rem;
+  font-family: 'Cairo', sans-serif;
   background-color: #a6fcca;
   border: none;
   border-radius: 100px;
@@ -43,4 +39,10 @@ input[type='submit']:hover {
 
 form:invalid input[type='submit'] {
   opacity: 0.5;
+}
+::placeholder {
+  font-family: 'Cairo', sans-serif;
+  color: #434343;
+  font-size: 1.2rem;
+  text-align: center;
 }

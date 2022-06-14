@@ -1,6 +1,12 @@
 .App {
-  font-family: 'Mochiy Pop One', sans-serif;
   color: #434343;
   align-items: center;
   background-color: #74c999;
+  font-family: 'Cairo', sans-serif;
+}
+h1 {
+  font-family: 'Mochiy Pop One', sans-serif;
+}
+label {
+  font-size: 1.2rem;
 }

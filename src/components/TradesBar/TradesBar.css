@@ -1,0 +1,35 @@
+.tradesBar {
+  content: '';
+  width: 100%;
+  height: 180px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow-x: auto;
+}
+.tradesBar p {
+  font-size: 1.2rem;
+  margin-top: 0;
+}
+.production {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+  width: 200px;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.trade {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 10px;
+  border: solid 1px #ffffff;
+  width: 75%;
+  height: 100%;
+  border-radius: 20px;
+  overflow-x: scroll;
+}
