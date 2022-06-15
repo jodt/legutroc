@@ -51,9 +51,30 @@ const checkIfUserExists = async (req, res, next) => {
   }
 };
 
+const checkIfAlreadyInProduction = async (req, res, next) => {
+  try {
+    const production = await getProduction(req, res);
+    const productionDetailled = await getProductionDetailled(production);
+    const vegetableId = req.body.vegetableId;
+
+    const alreadyInProduction = productionDetailled.some(
+      prod => prod.vegetable.id === Number(vegetableId)
+    );
+    if (!alreadyInProduction) {
+      next();
+    } else {
+      res.status(400).send({
+        message: `You already have this vegetable in your production`,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
 module.exports = {
   getIdParam,
   getProduction,
   getProductionDetailled,
   checkIfUserExists,
+  checkIfAlreadyInProduction,
 };

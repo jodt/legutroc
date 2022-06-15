@@ -4,6 +4,7 @@ const {
   getProduction,
   getProductionDetailled,
   checkIfUserExists,
+  checkIfAlreadyInProduction,
 } = require('../helpers');
 
 const userProductionRouter = express.Router();
@@ -19,6 +20,20 @@ userProductionRouter.get(
     } catch (err) {
       console.error(err);
     }
+  }
+);
+
+userProductionRouter.post(
+  '/:userId',
+  checkIfUserExists,
+  checkIfAlreadyInProduction,
+  async (req, res, next) => {
+    const production = await models.userProduction.create({
+      userId: req.params.userId,
+      vegetableId: req.body.vegetableId,
+      description: req.body.description || '',
+    });
+    res.status(201).send(production);
   }
 );
 
