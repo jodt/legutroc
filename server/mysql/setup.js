@@ -38,15 +38,11 @@ const sequelize = require('../sequelize');
     ]);
 
     await sequelize.models.userProduction.bulkCreate([
-      { userId: 1, vegetableId: 2 },
-      { userId: 2, vegetableId: 1 },
-      { userId: 3, vegetableId: 3 },
+      { userId: 1, vegetableId: 2, description: '3kg en stock' },
+      { userId: 1, vegetableId: 1, description: '10kg en stock' },
     ]);
 
-    await sequelize.models.trades.bulkCreate([
-      { userProductionId_1: 1, userProductionId_2: 2 },
-      { userProductionId_1: 1, userProductionId_2: 3 },
-    ]);
+    await sequelize.models.trades.bulkCreate([]);
   } catch (err) {
     console.error(err);
   }

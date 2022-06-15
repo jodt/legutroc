@@ -26,6 +26,10 @@ module.exports = sequelize => {
           key: 'id',
         },
       },
+      description: {
+        allowNull: true,
+        type: DataTypes.STRING,
+      },
     },
     {
       timestamps: false,
