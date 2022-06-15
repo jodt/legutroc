@@ -2,16 +2,35 @@ import React from 'react';
 import { Vegetable } from '../Vegetable/Vegetable';
 import './TradesBar.css';
 
-export default function TradesBar({ products, trades }) {
+export default function TradesBar({
+  products,
+  trades,
+  prodIndex,
+  removeProduction,
+  removeTrade,
+}) {
   return (
     <div className="tradesBar">
-      {console.log(products)}
       <div className="production">
-        <Vegetable products={products} />
+        <Vegetable
+          deletable={true}
+          products={products}
+          prodIndex={prodIndex}
+          removeProduction={removeProduction}
+        />
       </div>
       <div className="trade">
-        {trades.map(trade => {
-          return <Vegetable exchange={true} key={trade.id} products={trade} />;
+        {trades.map((trade, index) => {
+          return (
+            <Vegetable
+              exchange={true}
+              deletable={true}
+              key={trade.id}
+              products={trade}
+              indexTrade={index}
+              removeTrade={removeTrade}
+            />
+          );
         })}
       </div>
     </div>
