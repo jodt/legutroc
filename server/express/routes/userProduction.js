@@ -1,13 +1,24 @@
 const express = require('express');
 const { models } = require('../../sequelize');
+
 const {
   getProduction,
   getProductionDetailled,
   checkIfUserExists,
+  checkIfVegetableExists,
   checkIfAlreadyInProduction,
+  copyOfObject,
 } = require('../helpers');
 
 const userProductionRouter = express.Router();
+
+userProductionRouter.get('/', async (req, res, next) => {
+  const production = await models.userProduction.findAll();
+  const productionDetailled = await getProductionDetailled(
+    copyOfObject(production)
+  );
+  res.send({ production: productionDetailled });
+});
 
 userProductionRouter.get(
   '/:userId',
@@ -54,6 +65,25 @@ userProductionRouter.delete(
     } catch (err) {
       console.error(err);
       res.status(500).send({ message: 'An error occured' });
+    }
+  }
+);
+
+userProductionRouter.get(
+  '/vegetables/:vegetableId',
+  checkIfVegetableExists,
+  async (req, res, next) => {
+    try {
+      const users = await models.userProduction.findAll({
+        where: { vegetableId: req.params.vegetableId },
+      });
+      const productionDetailled = await getProductionDetailled(
+        copyOfObject(users)
+      );
+
+      res.status(200).send({ production: productionDetailled });
+    } catch (err) {
+      console.error(err);
     }
   }
 );
