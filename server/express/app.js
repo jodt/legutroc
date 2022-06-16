@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const errorhandler = require('errorhandler');
+const { models } = require('../sequelize');
 
 const routers = {
   users: require('./routes/users'),
@@ -22,9 +23,18 @@ app.get('/api/status', (req, res, next) => {
   res.send({ status: 'OK' });
 });
 
-// session: {lastName, firstName, id} 200 - 400
-
-app.post('/auth', (req, res, next) => {});
+app.post('/api/auth', async (req, res, next) => {
+  try {
+    const user = await models.users.findOne({ where: req.body });
+    if (user) {
+      res.status(200).send({ session: user });
+    } else {
+      res.status(401).send({ message: 'Incorrect credentials' });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 const PORT = process.env.PORT || 4000;
 
