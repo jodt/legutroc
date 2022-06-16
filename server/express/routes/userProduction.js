@@ -5,7 +5,6 @@ const {
   getProduction,
   getProductionDetailled,
   checkIfUserExists,
-  checkIfVegetableExists,
   checkIfAlreadyInProduction,
   copyOfObject,
 } = require('../helpers');
@@ -32,16 +31,15 @@ userProductionRouter.get('/search', async (req, res, next) => {
       res.status(200).send({ production: productionDetailled });
     else {
       const productionFiltered = productionDetailled.filter(production => {
-        if (city && vegetableId) {
-          return (
-            production.user.city === city &&
-            production.vegetable.id === vegetableId
-          );
-        } else if (!city) {
+        if (!city && vegetableId) {
           return production.vegetable.id === vegetableId;
-        } else if (!vegetableId) {
+        } else if (!vegetableId && city) {
           return production.user.city === city;
         }
+        return (
+          production.user.city === city &&
+          production.vegetable.id === vegetableId
+        );
       });
       res.status(200).send({ production: productionFiltered });
     }

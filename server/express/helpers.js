@@ -60,17 +60,6 @@ const checkIfUserExists = async (req, res, next) => {
   }
 };
 
-const checkIfVegetableExists = async (req, res, next) => {
-  const vegetable = await models.vegetables.findOne({
-    where: { id: req.params.vegetableId },
-  });
-  if (!vegetable) {
-    res.status(404).send({ message: 'Vegetable not found' });
-  } else {
-    next();
-  }
-};
-
 const checkIfAlreadyInProduction = async (req, res, next) => {
   try {
     const production = await getProduction(req, res);
@@ -98,7 +87,6 @@ module.exports = {
   getProduction,
   getProductionDetailled,
   checkIfUserExists,
-  checkIfVegetableExists,
   checkIfAlreadyInProduction,
   copyOfObject,
 };
