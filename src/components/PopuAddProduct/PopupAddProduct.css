@@ -30,6 +30,7 @@
   align-content: flex-start;
   flex-wrap: wrap;
   border: solid 1px black;
+  border-radius: 25px;
 }
 
 .allProducts .Vegetable {
@@ -43,9 +44,26 @@
   height: 30px;
 }
 .description {
-  margin: 20px;
+  width: 90%;
+  height: 35%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+}
+
+.description label {
+  font-size: 1.2rem;
+}
+.description .menuButton {
+  width: 30%;
+  font-size: 1.2rem;
+  font-family: 'Cairo', sans-serif;
+  background-color: #a6fcca;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.description textarea:focus {
+  outline: none;
 }

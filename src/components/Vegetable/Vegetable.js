@@ -10,13 +10,21 @@ export function Vegetable({
   removeProduction,
   removeTrade,
   onclick,
+  isSelected,
 }) {
   const handleClick = () => {
     !exchange ? removeProduction(prodIndex) : removeTrade(indexTrade);
   };
 
   return (
-    <div className="Vegetable" onClick={() => onclick(products)}>
+    <div
+      key={products.id}
+      className="Vegetable"
+      onClick={() => onclick(products)}
+      style={{
+        border: products.id === isSelected ? 'solid red 2px' : 'none',
+      }}
+    >
       <p>{products.name}</p>
       <img
         src={products.img}
