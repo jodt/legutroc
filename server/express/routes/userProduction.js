@@ -20,6 +20,37 @@ userProductionRouter.get('/', async (req, res, next) => {
   res.send({ production: productionDetailled });
 });
 
+userProductionRouter.get('/search', async (req, res, next) => {
+  const city = req.query.city;
+  const vegetableId = Number(req.query.vegetableId);
+  try {
+    const production = await models.userProduction.findAll();
+    const productionDetailled = await getProductionDetailled(
+      copyOfObject(production)
+    );
+    if (!city && !vegetableId)
+      res.status(200).send({ production: productionDetailled });
+    else {
+      const productionFiltered = productionDetailled.filter(production => {
+        if (city && vegetableId) {
+          return (
+            production.user.city === city &&
+            production.vegetable.id === vegetableId
+          );
+        } else if (!city) {
+          return production.vegetable.id === vegetableId;
+        } else if (!vegetableId) {
+          return production.user.city === city;
+        }
+      });
+      res.status(200).send({ production: productionFiltered });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 userProductionRouter.get(
   '/:userId',
   checkIfUserExists,
@@ -65,25 +96,6 @@ userProductionRouter.delete(
     } catch (err) {
       console.error(err);
       res.status(500).send({ message: 'An error occured' });
-    }
-  }
-);
-
-userProductionRouter.get(
-  '/vegetables/:vegetableId',
-  checkIfVegetableExists,
-  async (req, res, next) => {
-    try {
-      const users = await models.userProduction.findAll({
-        where: { vegetableId: req.params.vegetableId },
-      });
-      const productionDetailled = await getProductionDetailled(
-        copyOfObject(users)
-      );
-
-      res.status(200).send({ production: productionDetailled });
-    } catch (err) {
-      console.error(err);
     }
   }
 );

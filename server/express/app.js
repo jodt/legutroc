@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const errorhandler = require('errorhandler');
 
 const routers = {
   users: require('./routes/users'),
@@ -11,6 +12,7 @@ const routers = {
 const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(errorhandler());
 
 for (const [routerName, router] of Object.entries(routers)) {
   app.use(`/api/${routerName}`, router);
@@ -20,7 +22,9 @@ app.get('/api/status', (req, res, next) => {
   res.send({ status: 'OK' });
 });
 
-// /!\ Route de connexion (vérifier email et mot de passe)
+// session: {lastName, firstName, id} 200 - 400
+
+app.post('/auth', (req, res, next) => {});
 
 const PORT = process.env.PORT || 4000;
 
