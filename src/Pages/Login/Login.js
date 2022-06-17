@@ -1,39 +1,56 @@
 import './Login.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { auth } from '../../api/auth/auth';
 import { Form } from '../../components/Form/Form';
 
 export function Login(props) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleChangeEmail = event => {
-    setEmail(event.target.value);
-  };
+  const [userInfos, setUserInfos] = useState('');
+  const [userProfile, setUserProfile] = useState('');
 
-  const handleChangePassword = ({ target }) => {
-    setPassword(target.value);
-  };
-  const handleSubmit = event => {
-    if (auth(email, password)) {
+  useEffect(() => {
+    if (userProfile) {
       props.onlogin(true);
       navigate('dashboard');
     }
+  }, [userProfile, navigate, props]);
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setUserInfos(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const user = await auth(userInfos);
+    setUserProfile(user);
+    /*if (userProfile) {
+      props.onlogin(true);
+      navigate('dashboard');
+    }*/
+    /*{
+      props.onlogin(true);
+
+    }*/
   };
 
   const formFields = [
     {
       type: 'email',
+      name: 'email',
       placeholder: 'Email',
       pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]{2,3}$',
-      onChange: handleChangeEmail,
+      onChange: handleChange,
     },
     {
+      name: 'password',
       type: 'password',
       placeholder: 'Mot de Passe',
-      onChange: handleChangePassword,
+      onChange: handleChange,
     },
     {
       type: 'submit',

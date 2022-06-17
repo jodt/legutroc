@@ -10,6 +10,7 @@ export function Form({ formFields, onSubmit, id }) {
             {field.id && <label htmlFor={field.id}>{field.label}</label>}
             <input
               required
+              autoComplete="off"
               id={id}
               type={field.type}
               pattern={field.pattern}
