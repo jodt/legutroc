@@ -1,0 +1,69 @@
+.popupBox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: #00000050;
+  z-index: 10;
+}
+
+.popupAddProduct {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  max-width: 800px;
+  height: 70vh;
+  background-color: white;
+  border-radius: 50px;
+}
+.allProducts {
+  width: 90%;
+  height: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  border: solid 1px black;
+  border-radius: 25px;
+}
+
+.allProducts .Vegetable {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.allProducts .Vegetable img {
+  width: 30px;
+  height: 30px;
+}
+.description {
+  width: 90%;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.description label {
+  font-size: 1.2rem;
+}
+.description .menuButton {
+  width: 30%;
+  font-size: 1.2rem;
+  font-family: 'Cairo', sans-serif;
+  background-color: #a6fcca;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.description textarea:focus {
+  outline: none;
+}
