@@ -41,3 +41,7 @@
 .registerLink:hover {
   opacity: 0.8;
 }
+
+.loginPage form:invalid input[type='submit'] {
+  opacity: 0.5;
+}

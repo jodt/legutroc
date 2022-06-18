@@ -1,7 +1,7 @@
 import React from 'react';
 import './Form.css';
 
-export function Form({ formFields, onSubmit, id }) {
+export function Form({ formFields, onSubmit, id, checkpassword}) {
   return (
     <form onSubmit={onSubmit}>
       {formFields.map((field, index) => {
@@ -18,6 +18,7 @@ export function Form({ formFields, onSubmit, id }) {
               onChange={field.onChange}
               value={field.value}
               name={field.name}
+              style={{border: !checkpassword  && field.id==='passwordConfirm'? 'solid red 2px': ''}}
             ></input>
           </React.Fragment>
         );

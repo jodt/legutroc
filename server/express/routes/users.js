@@ -63,7 +63,7 @@ userRouter.post('/', async (req, res, next) => {
       where: { email: req.body.email },
     });
     if (user) {
-      return res.status(400).send({ message: 'This email is already used' });
+      return res.status(400).send({ code: 400, message: 'Cet email existe déjà' });
     }
     const newUser = await models.users.create({
       firstName: req.body.firstName,
@@ -72,7 +72,7 @@ userRouter.post('/', async (req, res, next) => {
       password: req.body.password,
       city: req.body.city,
     });
-    res.status(201).send({ newUser });
+    res.status(201).send({ code: 201, message: 'Merci pour votre inscription' });
   } catch (err) {
     res.status(400).send({ message: 'Email is required' });
   }
