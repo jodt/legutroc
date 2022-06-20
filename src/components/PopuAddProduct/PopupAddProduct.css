@@ -22,6 +22,11 @@
   background-color: white;
   border-radius: 50px;
 }
+.popupAddProduct .errorMessage {
+  position: absolute;
+  transform: translateY(400%);
+  margin: 0;
+}
 .allProducts {
   width: 90%;
   height: 40%;
@@ -42,6 +47,10 @@
 .allProducts .Vegetable img {
   width: 30px;
   height: 30px;
+}
+.allProducts .Vegetable p {
+  text-align: center;
+  margin: 0;
 }
 .description {
   width: 90%;
@@ -64,6 +73,10 @@
   border-radius: 100px;
   cursor: pointer;
 }
+.description .menuButton:disabled {
+  opacity: 0.5;
+}
+
 .description textarea:focus {
   outline: none;
 }

@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { auth } from '../../api/auth/auth';
 import { Form } from '../../components/Form/Form';
 
-export function Login(props) {
+export function Login({ onlogin, userPropriety }) {
   const navigate = useNavigate();
 
   const [userInfos, setUserInfos] = useState('');
@@ -12,10 +12,11 @@ export function Login(props) {
 
   useEffect(() => {
     if (userProfile) {
-      props.onlogin(true);
+      onlogin(true);
+      userPropriety(userProfile);
       navigate('dashboard');
     }
-  }, [userProfile, navigate, props]);
+  }, [userProfile, navigate]);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -28,14 +29,6 @@ export function Login(props) {
     event.preventDefault();
     const user = await auth(userInfos);
     setUserProfile(user);
-    /*if (userProfile) {
-      props.onlogin(true);
-      navigate('dashboard');
-    }*/
-    /*{
-      props.onlogin(true);
-
-    }*/
   };
 
   const formFields = [

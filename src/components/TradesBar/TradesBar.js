@@ -2,12 +2,13 @@ import React from 'react';
 import { Vegetable } from '../Vegetable/Vegetable';
 import './TradesBar.css';
 
-export default function TradesBar({
+export function TradesBar({
   products,
   trades,
   prodIndex,
   removeProduction,
   removeTrade,
+  onHover,
 }) {
   return (
     <div className="tradesBar">
@@ -17,6 +18,7 @@ export default function TradesBar({
           products={products}
           prodIndex={prodIndex}
           removeProduction={removeProduction}
+          onHover={onHover}
         />
       </div>
       <div className="trade">
@@ -27,7 +29,7 @@ export default function TradesBar({
               deletable={true}
               key={trade.id}
               products={trade}
-              indexTrade={index}
+              Tradeindex={index}
               removeTrade={removeTrade}
             />
           );

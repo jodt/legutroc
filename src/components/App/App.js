@@ -5,25 +5,42 @@ import { Login } from '../../Pages/Login/Login';
 import { ProtectedRoute } from '../../routes/ProtectedRoute';
 import { Dashboard } from '../../Pages/Dashboard/Dasboard';
 import { Register } from '../../Pages/Register/Register';
+import { UserContext } from '../../contexts/userContext';
 
 function App() {
-  const [login, setLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState({});
 
   const handlelogin = bool => {
-    setLogin(bool);
+    setIsLogin(bool);
+  };
+  const userPropriety = user => {
+    setUser(user);
   };
   return (
     <div className="App">
       <Routes>
-        <Route index element={<Login onlogin={handlelogin} />} />
-        <Route path="home" element={<Login onlogin={handlelogin} />} />
+        <Route
+          index
+          element={
+            <Login onlogin={handlelogin} userPropriety={userPropriety} />
+          }
+        />
+        <Route
+          path="home"
+          element={
+            <Login onlogin={handlelogin} userPropriety={userPropriety} />
+          }
+        />
         <Route path="register" element={<Register />} />
         <Route
           path="dashboard"
           element={
-            <ProtectedRoute user={login}>
-              <Dashboard />
-            </ProtectedRoute>
+            <UserContext.Provider value={user}>
+              <ProtectedRoute isLogin={isLogin}>
+                <Dashboard />
+              </ProtectedRoute>
+            </UserContext.Provider>
           }
         />
       </Routes>

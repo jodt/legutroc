@@ -1,50 +1,82 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { retrieveProd } from '../../api/production/retrieveProd';
+import { clearProd } from '../../api/production/clearProd';
+import { addProd } from '../../api/production/addProd';
 import { Button } from '../../components/Button/Button';
 import { PopupAddProduct } from '../../components/PopuAddProduct/PopupAddProduct';
-import TradesBar from '../../components/TradesBar/TradesBar';
+import { TradesBar } from '../../components/TradesBar/TradesBar';
+import { UserContext } from '../../contexts/userContext';
 import './Dashboard.css';
 
 export function Dashboard() {
-  const [productions, setProductions] = useState([
-    {
-      id: 1,
-      name: 'Tomate',
-      img: require('../../assets/images/tomate.png'),
-    },
-    {
-      id: 2,
-      name: 'poireau',
-      img: require('../../assets/images/poireau.png'),
-    },
-    /*{
-      id: 2,
-      name: 'poireau',
-      img: require('../../assets/images/kiwi.png'),
-    },*/
-  ]);
-  const [trades, setTrades] = useState([
-    {
-      id: 2,
-      name: 'poireau',
-      img: require('../../assets/images/poireau.png'),
-    },
-    {
-      id: 2,
-      name: 'poireau',
-      img: require('../../assets/images/kiwi.png'),
-    },
-  ]);
-
+  const user = useContext(UserContext);
+  const [productions, setProductions] = useState([]);
+  const [prodIdToClear, setProdIdToClear] = useState(null);
+  const [vegetableToAdd, setVegetableToAdd] = useState(null);
+  const [trades, setTrades] = useState([]);
+  const [onHover, setOnHover] = useState(false);
+  const [vegetableInfos, setVegetableInfos] = useState('');
   const [popUp, setPopup] = useState(false);
+
+  const fetchData = async () => {
+    retrieveProd(user.id).then(value =>
+      value.production.map(prod =>
+        setProductions(prev => [
+          ...prev,
+          {
+            id: prod.id,
+            name: prod.vegetable.name,
+            image: prod.vegetable.image,
+            description: prod.description,
+            vegetableId: prod.vegetable.id,
+          },
+        ])
+      )
+    );
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (vegetableToAdd) {
+      addProd(user.id, vegetableToAdd).then(() => {
+        fetchData();
+      });
+    }
+    return () => {
+      setProductions([]);
+    };
+  }, [vegetableToAdd]);
+
+  useEffect(() => {
+    if (prodIdToClear) {
+      clearProd(user.id, prodIdToClear);
+    }
+  }, [prodIdToClear]);
 
   const displayPopup = () => {
     setPopup(!popUp);
   };
 
   const addProduction = target => {
-    setProductions(prev => [...prev, target]);
-  };
+    /*const isInProduction = productions.some(
+      element => target.id === element.vegetableId
+    );
+    if (!isInProduction) {*/
+    setVegetableToAdd({
+      userId: user.id,
+      vegetableId: target.id,
+      description: target.description,
+    });
+  }; /*else {
+      setErrorMessage('Ce légume est déja dans la production');
+    }
+  };*/
+
   const removeProduction = targetIndex => {
+    setProdIdToClear(productions[targetIndex].id);
     setProductions(prev => prev.filter((item, index) => index !== targetIndex));
   };
 
@@ -52,6 +84,10 @@ export function Dashboard() {
     setTrades(prev => prev.filter((item, index) => index !== targetIndex));
   };
 
+  const displayVegetableInfos = target => {
+    setOnHover(!onHover);
+    setVegetableInfos(target.description);
+  };
   /*const addProduction = ({ vegetable }) => {
     setProductions(prev => {
       if prev.includes(vegetable.id) {
@@ -64,10 +100,14 @@ export function Dashboard() {
   return (
     <div className="Dashboard">
       {popUp && (
-        <PopupAddProduct onclick={addProduction} onDisplay={displayPopup} />
+        <PopupAddProduct
+          onclick={addProduction}
+          onDisplay={displayPopup}
+          productions={productions}
+        />
       )}
       <div className="DashboardHeader">
-        <h1>Bienvenue sur votre jardin</h1>
+        <h1>Bonjour {user.firstName} et Bienvenue sur votre jardin</h1>
       </div>
       <div className="body">
         <div className="aside">
@@ -78,6 +118,7 @@ export function Dashboard() {
           </div>
           <div className="informations">
             <h2>Informations</h2>
+            {onHover ? <p>{vegetableInfos}</p> : ''}
           </div>
         </div>
         <div className="DashboardlPanel">
@@ -94,6 +135,7 @@ export function Dashboard() {
                 prodIndex={index}
                 removeProduction={removeProduction}
                 removeTrade={removeTrade}
+                onHover={displayVegetableInfos}
               />
             );
           })}

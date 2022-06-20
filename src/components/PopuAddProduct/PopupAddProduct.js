@@ -3,24 +3,23 @@ import { Button } from '../Button/Button';
 import { Vegetable } from '../Vegetable/Vegetable';
 import './PopupAddProduct.css';
 import { styleCloseBtn } from './constants';
+import { retrieveAllVegetables } from '../../api/vegetables/getAllVegetables';
 
-export function PopupAddProduct({ onclick, onDisplay }) {
-  const vegetables = [
-    {
-      id: 2,
-      name: 'poireau',
-      img: require('../../assets/images/poireau.png'),
-    },
-    {
-      id: 1,
-      name: 'Tomate',
-      img: require('../../assets/images/tomate.png'),
-    },
-  ];
+export function PopupAddProduct({ onclick, onDisplay, productions }) {
+  const [vegetables, setVegetables] = useState([]);
 
   const [vegetableSelected, setvegetableSelected] = useState(null);
-  const [vegetableDescription, setVegetabledescritpion] = useState(null);
+  const [vegetableDescription, setVegetabledescritpion] = useState('');
   const [isSelectedId, setIsSelectedId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(() => {
+    retrieveAllVegetables().then(value => {
+      value.vegetables.map(vegetable => {
+        setVegetables(prev => [...prev, vegetable]);
+      });
+    });
+  }, []);
 
   useEffect(() => {
     if (vegetableSelected && vegetableSelected.description) {
@@ -30,8 +29,16 @@ export function PopupAddProduct({ onclick, onDisplay }) {
   }, [vegetableSelected]);
 
   const selectVegetable = product => {
-    setvegetableSelected(product);
+    const isInProduction = productions.some(
+      element => product.id === element.vegetableId
+    );
     setIsSelectedId(product.id);
+    if (!isInProduction) {
+      setvegetableSelected(product);
+      setErrorMessage('');
+    } else {
+      setErrorMessage('Ce légume est déjà dans votre production');
+    }
   };
 
   const handleChange = ({ target }) => {
@@ -50,10 +57,19 @@ export function PopupAddProduct({ onclick, onDisplay }) {
       <div className="popupAddProduct">
         <Button style={styleCloseBtn} nameButton={'X'} onclick={onDisplay} />
         <h1>Ajouter un produit</h1>
+        {errorMessage ? (
+          <p className="errorMessage" style={{ color: 'red' }}>
+            {' '}
+            {errorMessage}
+          </p>
+        ) : (
+          ''
+        )}
         <div className="allProducts">
-          {vegetables.map(products => {
+          {vegetables.map((products, index) => {
             return (
               <Vegetable
+                key={index}
                 deletable={false}
                 products={products}
                 onclick={selectVegetable}
@@ -70,7 +86,11 @@ export function PopupAddProduct({ onclick, onDisplay }) {
             value={vegetableDescription}
             onChange={handleChange}
           ></textarea>
-          <Button nameButton={'Valider'} onclick={addDescription} />
+          <Button
+            nameButton={'Valider'}
+            onclick={addDescription}
+            disabled={errorMessage}
+          />
         </div>
       </div>
     </div>

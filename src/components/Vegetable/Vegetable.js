@@ -6,16 +6,19 @@ export function Vegetable({
   exchange,
   deletable,
   prodIndex,
-  indexTrade,
+  Tradeindex,
   removeProduction,
   removeTrade,
   onclick,
   isSelected,
+  onHover,
 }) {
   const handleClick = () => {
-    !exchange ? removeProduction(prodIndex) : removeTrade(indexTrade);
+    !exchange ? removeProduction(prodIndex) : removeTrade(Tradeindex);
   };
-
+  const handleHover = () => {
+    return !onHover ? null : onHover(products);
+  };
   return (
     <div
       key={products.id}
@@ -24,10 +27,12 @@ export function Vegetable({
       style={{
         border: products.id === isSelected ? 'solid red 2px' : 'none',
       }}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
     >
       <p>{products.name}</p>
       <img
-        src={products.img}
+        src={products.image}
         alt={products.name}
         height="50px"
         width="50px"
