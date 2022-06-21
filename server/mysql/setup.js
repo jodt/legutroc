@@ -20,11 +20,11 @@ const sequelize = require('../sequelize');
         city: 'Béthune',
       },
       {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@dohn.com',
-        password: 'ozajezf599dza5',
-        city: 'Paris',
+        firstName: 'Marion',
+        lastName: 'Declerck',
+        email: 'mxrion.d@hotmail.com',
+        password: 'uiaziaeropez778',
+        city: 'Beuvrages',
       },
     ]);
 
@@ -38,11 +38,17 @@ const sequelize = require('../sequelize');
     ]);
 
     await sequelize.models.userProduction.bulkCreate([
-      { userId: 1, vegetableId: 2, description: '3kg en stock' },
-      { userId: 1, vegetableId: 1, description: '10kg en stock' },
+      { userId: 1, vegetableId: 1, description: '3kg de broccoli' },
+      { userId: 1, vegetableId: 6, description: "1 kg d'endives" },
+      { userId: 2, vegetableId: 2, description: '10kg de pommes de terres' },
+      { userId: 3, vegetableId: 5, description: '2kg de poivrons' },
+      { userId: 3, vegetableId: 4, description: '3 choux en stock' },
     ]);
 
-    await sequelize.models.trades.bulkCreate([]);
+    await sequelize.models.trades.bulkCreate([
+      { userProductionId_1: 1, userProductionId_2: 2 },
+      { userProductionId_1: 1, userProductionId_2: 3 },
+    ]);
   } catch (err) {
     console.error(err);
   }

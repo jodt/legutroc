@@ -1,31 +1,24 @@
 const express = require('express');
-const morgan = require('morgan');
-const errorhandler = require('errorhandler');
-const cors = require('cors');
 const { models } = require('../sequelize');
-
-const routers = {
-  users: require('./routes/users'),
-  vegetables: require('./routes/vegetables'),
-  userProduction: require('./routes/userProduction'),
-  trades: require('./routes/trades'),
-};
-
 const app = express();
 
-app.use(cors());
-app.use(morgan('dev'));
+// Middlewares
+app.use(require('cors')());
+app.use(require('morgan')('dev'));
 app.use(express.json());
-app.use(errorhandler());
 
-for (const [routerName, router] of Object.entries(routers)) {
-  app.use(`/api/${routerName}`, router);
-}
+// Routers
+app.use('/api/users', require('./routes/users'));
+app.use('/api/vegetables', require('./routes/vegetables'));
+app.use('/api/userProduction', require('./routes/userProduction'));
+app.use('/api/trades', require('./routes/trades'));
 
+// Status of API
 app.get('/api/status', (req, res, next) => {
   res.send({ status: 'OK' });
 });
 
+// Check login credentials
 app.post('/api/auth', async (req, res, next) => {
   try {
     const user = await models.users.findOne({ where: req.body });
