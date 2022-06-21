@@ -1,15 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from '../../components/Form/Form';
 import './Register.css';
+import { createUser } from '../../api/users/create';
+import { useNavigate } from 'react-router-dom';
 
 export function Register() {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
     lastName: '',
     firstName: '',
     city: '',
     email: '',
     password: '',
+    passwordConfirm: '',
   });
+
+  const [onRegister, setOnRegister] = useState(false);
+  const [statusCode, setStatusCode] = useState({ code: '', message: '' });
+
+  const checkPwd = profile.password === profile.passwordConfirm;
+
+  useEffect(() => {
+    if (statusCode.code == 201) {
+      setOnRegister(true);
+      const timer = setTimeout(() => navigate('/'), 2000);
+      return () => {
+        clearTimeout(timer);
+      };
+    } else if (statusCode.code == 400) {
+      setOnRegister(true);
+      const timer = setTimeout(() => {
+        setOnRegister(false);
+        cancelForm();
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [statusCode]);
+
+  const cancelForm = pwd => {
+    if (!pwd) {
+      setProfile(prev => ({
+        ...prev,
+        email: '',
+        password: '',
+        passwordConfirm: '',
+      }));
+    } else {
+      setProfile(prev => ({
+        ...prev,
+        password: '',
+        passwordConfirm: '',
+      }));
+    }
+  };
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -21,7 +66,17 @@ export function Register() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(profile);
+    if (!checkPwd) {
+      return cancelForm(true);
+    }
+    delete profile.passwordConfirm;
+    return createUser(profile).then(value =>
+      setStatusCode(prev => ({
+        ...prev,
+        code: value.code,
+        message: value.message,
+      }))
+    );
   };
 
   const formFields = [
@@ -30,7 +85,7 @@ export function Register() {
       name: 'lastName',
       label: 'Nom :',
       type: 'text',
-      value: profile.name,
+      value: profile.lastName,
       onChange: handleChange,
     },
     {
@@ -71,6 +126,7 @@ export function Register() {
       name: 'passwordConfirm',
       label: 'Confirmation de Mot de Passe :',
       type: 'password',
+      value: profile.passwordConfirm,
       onChange: handleChange,
     },
     {
@@ -82,9 +138,20 @@ export function Register() {
   return (
     <div className="register">
       <h1>Créer un compte et commencer à partager vos produits</h1>
-      <div className="formBox">
-        <Form label={true} formFields={formFields} onSubmit={handleSubmit} />
-      </div>
+      {onRegister ? (
+        <div className="onRegister">
+          <p>{statusCode.message}</p>
+        </div>
+      ) : (
+        <div className="formBox">
+          <Form
+            label={true}
+            formFields={formFields}
+            onSubmit={handleSubmit}
+            checkpassword={checkPwd}
+          />
+        </div>
+      )}
     </div>
   );
 }

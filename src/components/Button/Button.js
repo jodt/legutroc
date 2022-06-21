@@ -1,11 +1,17 @@
 import React from 'react';
 
-export function Button({ nameButton, onclick, style }) {
+export function Button({ nameButton, onclick, style, disabled, name }) {
   const handeClick = e => {
-    onclick();
+    onclick(e);
   };
   return (
-    <button className="menuButton" onClick={handeClick} style={style}>
+    <button
+      className="menuButton"
+      disabled={disabled}
+      onClick={handeClick}
+      name={name}
+      style={style}
+    >
       {nameButton}
     </button>
   );

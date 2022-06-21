@@ -23,7 +23,7 @@ app.post('/api/auth', async (req, res, next) => {
   try {
     const user = await models.users.findOne({ where: req.body });
     if (user) {
-      res.status(200).send({ session: user });
+      res.status(200).send(user);
     } else {
       res.status(401).send({ message: 'Incorrect credentials' });
     }

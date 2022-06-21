@@ -31,6 +31,12 @@
   box-shadow: 10px 20px 80px #4c8665;
 }
 
+.login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .registerLink {
   text-decoration: none;
   font-size: 1.2rem;
@@ -40,4 +46,8 @@
 }
 .registerLink:hover {
   opacity: 0.8;
+}
+
+.loginPage form:invalid input[type='submit'] {
+  opacity: 0.5;
 }

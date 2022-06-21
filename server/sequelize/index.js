@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const { applyExtraSetup } = require('./extra-setup');
 
-const sequelize = new Sequelize('legutroc', 'root', 'password', {
+const sequelize = new Sequelize('legutroc', 'root', '', {
   dialect: 'mysql',
   host: 'localhost',
   logging: false,

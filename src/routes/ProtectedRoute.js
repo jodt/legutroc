@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom';
 
-export const ProtectedRoute = props => {
-  if (!props.user) {
+export const ProtectedRoute = ({isLogin, children}) => {
+  if (!isLogin) {
     return <Navigate to="/" replace />;
   }
-  return props.children;
+  return children;
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Vegetable.css';
 
 export function Vegetable({
@@ -6,16 +6,23 @@ export function Vegetable({
   exchange,
   deletable,
   prodIndex,
-  indexTrade,
+  Tradeindex,
   removeProduction,
   removeTrade,
   onclick,
   isSelected,
+  onHover,
 }) {
   const handleClick = () => {
-    !exchange ? removeProduction(prodIndex) : removeTrade(indexTrade);
+    !exchange ? removeProduction(prodIndex) : removeTrade(Tradeindex);
+  };
+  const handleisHover = () => {
+    onHover(products);
   };
 
+  const handleIsNotHover = () => {
+    onHover(null);
+  };
   return (
     <div
       key={products.id}
@@ -24,10 +31,12 @@ export function Vegetable({
       style={{
         border: products.id === isSelected ? 'solid red 2px' : 'none',
       }}
+      onMouseEnter={onHover ? handleisHover : null}
+      onMouseLeave={onHover ? handleIsNotHover : null}
     >
       <p>{products.name}</p>
       <img
-        src={products.img}
+        src={products.image}
         alt={products.name}
         height="50px"
         width="50px"
