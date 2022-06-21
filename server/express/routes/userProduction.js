@@ -98,4 +98,17 @@ userProductionRouter.delete(
   }
 );
 
+userProductionRouter.put('/:productionId/status', async (req, res, next) => {
+  try {
+    const production = await models.userProduction.findOne({
+      where: { id: req.params.productionId },
+    });
+    production.status = 'Accepted';
+    production.save();
+    res.status(200).send('production updated');
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 module.exports = userProductionRouter;
