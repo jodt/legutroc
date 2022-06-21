@@ -1,0 +1,53 @@
+.popupTrade {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.popupTrade form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  margin: 5px 10px;
+}
+
+.popupTrade form input {
+  width: 20%;
+  height: 50px;
+  outline-style: none;
+}
+.popupTrade form input:valid {
+  border: solid 2px #a6fcca;
+}
+
+.popupTrade .tradeBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.popupTrade .results {
+  position: relative;
+  width: 90%;
+  height: 35%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 60px;
+  border: solid 1px black;
+  border-radius: 25px;
+}
+
+.popupTrade .results h2 {
+  position: absolute;
+  transform: translateY(-130%);
+}

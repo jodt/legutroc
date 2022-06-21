@@ -31,8 +31,8 @@ export function Vegetable({
       style={{
         border: products.id === isSelected ? 'solid red 2px' : 'none',
       }}
-      onMouseEnter={handleisHover}
-      onMouseLeave={handleIsNotHover}
+      onMouseEnter={onHover ? handleisHover : null}
+      onMouseLeave={onHover ? handleIsNotHover : null}
     >
       <p>{products.name}</p>
       <img

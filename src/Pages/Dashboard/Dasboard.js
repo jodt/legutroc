@@ -3,10 +3,10 @@ import { retrieveProd } from '../../api/production/retrieveProd';
 import { clearProd } from '../../api/production/clearProd';
 import { addProd } from '../../api/production/addProd';
 import { Button } from '../../components/Button/Button';
-import { PopupAddProduct } from '../../components/PopuAddProduct/PopupAddProduct';
 import { TradesBar } from '../../components/TradesBar/TradesBar';
 import { UserContext } from '../../contexts/userContext';
 import './Dashboard.css';
+import { PopupAddProductContainer } from '../../components/PopuAddProduct/PopuAddProductContainer';
 
 export function Dashboard() {
   const user = useContext(UserContext);
@@ -16,7 +16,7 @@ export function Dashboard() {
   const [trades, setTrades] = useState([]);
   const [onHover, setOnHover] = useState(false);
   const [vegetableInfos, setVegetableInfos] = useState('');
-  const [popUp, setPopup] = useState(false);
+  const [popUp, setPopup] = useState({ display: false, popupName: '' });
 
   const fetchData = async () => {
     retrieveProd(user.id).then(value =>
@@ -56,8 +56,11 @@ export function Dashboard() {
     }
   }, [prodIdToClear]);
 
-  const displayPopup = () => {
-    setPopup(!popUp);
+  const displayPopup = e => {
+    setPopup(prev => ({
+      display: !prev.display,
+      popupName: e.target.name,
+    }));
   };
 
   const addProduction = target => {
@@ -102,11 +105,12 @@ export function Dashboard() {
 
   return (
     <div className="Dashboard">
-      {popUp && (
-        <PopupAddProduct
+      {popUp.display && (
+        <PopupAddProductContainer
           onclick={addProduction}
           onDisplay={displayPopup}
           productions={productions}
+          popupName={popUp.popupName}
         />
       )}
       <div className="DashboardHeader">
@@ -116,8 +120,16 @@ export function Dashboard() {
         <div className="aside">
           <div className="Menu">
             <Button nameButton={'Mon compte'} />
-            <Button nameButton={'Ajouter un produit'} onclick={displayPopup} />
-            <Button nameButton={'Proposer un échange'} />
+            <Button
+              name={'addProduct'}
+              nameButton={'Ajouter un produit'}
+              onclick={displayPopup}
+            />
+            <Button
+              name={'tradeProduct'}
+              nameButton={'Proposer un échange'}
+              onclick={displayPopup}
+            />
           </div>
           <div className="informations">
             <h2>Informations</h2>
