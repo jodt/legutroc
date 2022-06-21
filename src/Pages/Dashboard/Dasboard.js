@@ -85,8 +85,11 @@ export function Dashboard() {
   };
 
   const displayVegetableInfos = target => {
-    setOnHover(!onHover);
-    setVegetableInfos(target.description);
+    if (target) {
+      setVegetableInfos(target.description);
+    } else {
+      setVegetableInfos('');
+    }
   };
   /*const addProduction = ({ vegetable }) => {
     setProductions(prev => {
@@ -118,7 +121,9 @@ export function Dashboard() {
           </div>
           <div className="informations">
             <h2>Informations</h2>
-            {onHover ? <p>{vegetableInfos}</p> : ''}
+            <div className="infoContent">
+              {vegetableInfos ? <p>***{vegetableInfos}***</p> : ''}
+            </div>
           </div>
         </div>
         <div className="DashboardlPanel">
