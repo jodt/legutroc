@@ -81,7 +81,13 @@ const checkIfAlreadyInProduction = async (req, res, next) => {
   }
 };
 
+const capitalizeFirstLetter = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+const lowerCaseAllKeys = obj =>
+  Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v.toLowerCase()]));
+
 const copyOfObject = obj => JSON.parse(JSON.stringify(obj));
+
 module.exports = {
   getIdParam,
   getProduction,
@@ -89,4 +95,6 @@ module.exports = {
   checkIfUserExists,
   checkIfAlreadyInProduction,
   copyOfObject,
+  capitalizeFirstLetter,
+  lowerCaseAllKeys,
 };

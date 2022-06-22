@@ -1,6 +1,12 @@
 const express = require('express');
 const { models } = require('../../sequelize');
-const { getIdParam } = require('../helpers');
+const {
+  getIdParam,
+  capitalizeFirstLetter,
+  lowerCaseAllKeys,
+} = require('../helpers');
+
+const bcrypt = require('bcrypt');
 
 const userRouter = express.Router();
 
@@ -58,21 +64,26 @@ userRouter.get('/:id', (req, res, next) => {
 });
 
 userRouter.post('/', async (req, res, next) => {
+  const copyOfBody = lowerCaseAllKeys(req.body);
   try {
     const user = await models.users.findOne({
       where: { email: req.body.email },
     });
     if (user) {
-      return res.status(400).send({ code: 400, message: 'Cet email existe déjà' });
+      return res
+        .status(400)
+        .send({ code: 400, message: 'Cet email existe déjà' });
     }
-    const newUser = await models.users.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      city: req.body.city,
+    await models.users.create({
+      firstName: capitalizeFirstLetter(copyOfBody.firstName),
+      lastName: copyOfBody.lastName.toUpperCase(),
+      email: copyOfBody.email,
+      password: bcrypt.hashSync(req.body.password, 10),
+      city: capitalizeFirstLetter(copyOfBody.city),
     });
-    res.status(201).send({ code: 201, message: 'Merci pour votre inscription' });
+    res
+      .status(201)
+      .send({ code: 201, message: 'Merci pour votre inscription' });
   } catch (err) {
     res.status(400).send({ message: 'Email is required' });
   }

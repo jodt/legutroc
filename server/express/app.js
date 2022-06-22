@@ -1,5 +1,6 @@
 const express = require('express');
 const { models } = require('../sequelize');
+const { checkUser } = require('./encrypt');
 const app = express();
 
 // Middlewares
@@ -21,8 +22,12 @@ app.get('/api/status', (req, res, next) => {
 // Check login credentials
 app.post('/api/auth', async (req, res, next) => {
   try {
-    const user = await models.users.findOne({ where: req.body });
-    if (user) {
+    const user = await models.users.findOne({
+      where: { email: req.body.email },
+    });
+    if (!user) res.status(401).send({ message: 'Mauvais email' });
+    const valid = await checkUser(req.body.password, user.password);
+    if (valid) {
       res.status(200).send(user);
     } else {
       res.status(401).send({ message: 'Incorrect credentials' });
