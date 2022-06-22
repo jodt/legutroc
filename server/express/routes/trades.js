@@ -5,6 +5,10 @@ const { getProductionDetailled } = require('../helpers');
 
 const tradeRouter = express.Router();
 
+tradeRouter.get('/', async (req, res, next) => {
+  res.status(200).send(await models.trades.findAll());
+});
+
 tradeRouter.get('/:userProductionId', async (req, res, next) => {
   try {
     const trades = await models.trades.findAll({
@@ -84,6 +88,22 @@ tradeRouter.put('/:tradeId/status', async (req, res, next) => {
     res.status(200).send('trade updated');
   } catch (err) {
     console.error(err);
+  }
+});
+
+tradeRouter.delete('/:tradeId/delete', async (req, res, next) => {
+  try {
+    const trade = await models.trades.findOne({
+      where: { id: req.params.tradeId },
+    });
+    if (trade) {
+      trade.destroy();
+      res.sendStatus(204);
+    } else {
+      res.status(404).send({ message: 'Invalid trade' });
+    }
+  } catch (err) {
+    console.error(error);
   }
 });
 
