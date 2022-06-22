@@ -66,7 +66,7 @@ tradeRouter.post('/', async (req, res, next) => {
   try {
     await models.trades.create({
       userProductionId_1: req.body.userProductionId_1,
-      userProductionId_2: req.body.userProductionId_1,
+      userProductionId_2: req.body.userProductionId_2,
     });
   } catch (err) {
     console.error(err);

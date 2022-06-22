@@ -47,6 +47,7 @@ export function PopupAddProduct({
           onChange={onchange}
         ></textarea>
         <Button
+          name={'valider'}
           nameButton={'Valider'}
           onclick={addDescription}
           disabled={errorMessage}

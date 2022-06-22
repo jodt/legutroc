@@ -27,7 +27,7 @@ export function Vegetable({
     <div
       key={products.id}
       className="Vegetable"
-      onClick={() => onclick(products)}
+      onClick={() => (onclick ? onclick(products) : '')}
       style={{
         border: products.id === isSelected ? 'solid red 2px' : 'none',
       }}

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Form.css';
 
-export function Form({ formFields, onSubmit, id, checkpassword}) {
+export function Form({ formFields, onSubmit, id, checkpassword, required }) {
   return (
     <form onSubmit={onSubmit}>
       {formFields.map((field, index) => {
@@ -9,7 +9,7 @@ export function Form({ formFields, onSubmit, id, checkpassword}) {
           <React.Fragment key={index}>
             {field.id && <label htmlFor={field.id}>{field.label}</label>}
             <input
-              required
+              required={!required ? false : true}
               autoComplete="off"
               id={id}
               type={field.type}
@@ -18,7 +18,12 @@ export function Form({ formFields, onSubmit, id, checkpassword}) {
               onChange={field.onChange}
               value={field.value}
               name={field.name}
-              style={{border: !checkpassword  && field.id==='passwordConfirm'? 'solid red 2px': ''}}
+              style={{
+                border:
+                  !checkpassword && field.id === 'passwordConfirm'
+                    ? 'solid red 2px'
+                    : '',
+              }}
             ></input>
           </React.Fragment>
         );

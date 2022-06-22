@@ -12,9 +12,11 @@ export function PopupAddProductContainer({
   onDisplay,
   productions,
   popupName,
+  closePopup,
+  onHover,
+  vegetableInfos,
 }) {
   const [vegetables, setVegetables] = useState([]);
-
   const [vegetableSelected, setvegetableSelected] = useState(null);
   const [vegetableDescription, setVegetabledescritpion] = useState('');
   const [isSelectedId, setIsSelectedId] = useState(null);
@@ -31,7 +33,7 @@ export function PopupAddProductContainer({
   useEffect(() => {
     if (vegetableSelected && vegetableSelected.description) {
       onclick(vegetableSelected);
-      onDisplay();
+      closePopup();
     }
   }, [vegetableSelected]);
 
@@ -58,7 +60,6 @@ export function PopupAddProductContainer({
       description: vegetableDescription,
     }));
   };
-
   return (
     <div className="popupBox">
       <div className="popupAddProduct">
@@ -74,7 +75,14 @@ export function PopupAddProductContainer({
             isSelectedId={isSelectedId}
           />
         ) : (
-          <PopupTrade />
+          <PopupTrade
+            productions={productions}
+            onHover={onHover}
+            vegetableInfos={vegetableInfos}
+            selectVegetable={selectVegetable}
+            isSelectedId={isSelectedId}
+            closePopup={closePopup}
+          />
         )}
 
         {/*<h1>Ajouter un produit</h1>

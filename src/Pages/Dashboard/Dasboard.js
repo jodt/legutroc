@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { retrieveProd } from '../../api/production/retrieveProd';
 import { clearProd } from '../../api/production/clearProd';
 import { addProd } from '../../api/production/addProd';
@@ -7,6 +7,7 @@ import { TradesBar } from '../../components/TradesBar/TradesBar';
 import { UserContext } from '../../contexts/userContext';
 import './Dashboard.css';
 import { PopupAddProductContainer } from '../../components/PopuAddProduct/PopuAddProductContainer';
+import { getTrades } from '../../api/trades/getTrades';
 
 export function Dashboard() {
   const user = useContext(UserContext);
@@ -15,12 +16,37 @@ export function Dashboard() {
   const [vegetableToAdd, setVegetableToAdd] = useState(null);
   const [trades, setTrades] = useState([]);
   const [onHover, setOnHover] = useState(false);
-  const [vegetableInfos, setVegetableInfos] = useState('');
+  const [vegetableInfos, setVegetableInfos] = useState({
+    userfirstName: '',
+    userCIty: '',
+    description: '',
+  });
   const [popUp, setPopup] = useState({ display: false, popupName: '' });
 
-  const fetchData = async () => {
+  const fetchDataTrades = async userIdProd => {
+    getTrades(userIdProd).then(value => {
+      value.trades.map(trade =>
+        setTrades(prev => [
+          ...prev,
+          {
+            id: trade.id,
+            name: trade.traderTwoProductionInfo.vegetable.name,
+            image: trade.traderTwoProductionInfo.vegetable.image,
+            description: trade.traderTwoProductionInfo.description,
+            vegetableId: trade.traderTwoProductionInfo.vegetable.id,
+            userfirstName: trade.traderTwoProductionInfo.user.firstName,
+            userlastName: trade.traderTwoProductionInfo.user.lastName,
+            userCIty: trade.traderTwoProductionInfo.user.city,
+            prodId: trade.traderOneProductionInfo.id,
+          },
+        ])
+      );
+    });
+  };
+
+  const fetchDataProd = async () => {
     retrieveProd(user.id).then(value =>
-      value.production.map(prod =>
+      value.production.map(prod => {
         setProductions(prev => [
           ...prev,
           {
@@ -30,23 +56,25 @@ export function Dashboard() {
             description: prod.description,
             vegetableId: prod.vegetable.id,
           },
-        ])
-      )
+        ]);
+        fetchDataTrades(prod.id);
+      })
     );
   };
 
   useEffect(() => {
-    fetchData();
+    fetchDataProd();
   }, []);
 
   useEffect(() => {
     if (vegetableToAdd) {
       addProd(user.id, vegetableToAdd).then(() => {
-        fetchData();
+        fetchDataProd();
       });
     }
     return () => {
       setProductions([]);
+      setTrades([]);
     };
   }, [vegetableToAdd]);
 
@@ -56,10 +84,24 @@ export function Dashboard() {
     }
   }, [prodIdToClear]);
 
+  /*useEffect(() => {
+    const trade = true;
+    if (trade) {
+      setTrades([]);
+    }
+  });*/
+
   const displayPopup = e => {
     setPopup(prev => ({
       display: !prev.display,
       popupName: e.target.name,
+    }));
+  };
+
+  const closePopup = () => {
+    setPopup(prev => ({
+      display: !prev.display,
+      popupName: '',
     }));
   };
 
@@ -89,9 +131,16 @@ export function Dashboard() {
 
   const displayVegetableInfos = target => {
     if (target) {
-      setVegetableInfos(target.description);
+      const { userfirstName, userlastName, userCIty, description } = target;
+      setVegetableInfos(prev => ({
+        ...prev,
+        userfirstName: userfirstName ? 'Prénom : ' + userfirstName : '',
+        userlastName: userlastName ? 'Nom : ' + userlastName : '',
+        userCIty: userCIty ? 'Ville: ' + userCIty : '',
+        description: 'Produit: ' + description,
+      }));
     } else {
-      setVegetableInfos('');
+      setVegetableInfos({});
     }
   };
   /*const addProduction = ({ vegetable }) => {
@@ -102,7 +151,6 @@ export function Dashboard() {
       [...prev, vegetable]
     })
   };*/
-
   return (
     <div className="Dashboard">
       {popUp.display && (
@@ -111,6 +159,9 @@ export function Dashboard() {
           onDisplay={displayPopup}
           productions={productions}
           popupName={popUp.popupName}
+          closePopup={closePopup}
+          onHover={displayVegetableInfos}
+          vegetableInfos={vegetableInfos}
         />
       )}
       <div className="DashboardHeader">
@@ -134,7 +185,20 @@ export function Dashboard() {
           <div className="informations">
             <h2>Informations</h2>
             <div className="infoContent">
-              {vegetableInfos ? <p>***{vegetableInfos}***</p> : ''}
+              {vegetableInfos && !popUp.display ? (
+                <>
+                  {vegetableInfos.userfirstName && (
+                    <p>{vegetableInfos.userfirstName}</p>
+                  )}
+                  {vegetableInfos.userlastName && (
+                    <p>{vegetableInfos.userlastName}</p>
+                  )}
+                  {vegetableInfos.userCIty && <p>{vegetableInfos.userCIty}</p>}
+                  <p>{vegetableInfos.description}</p>
+                </>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </div>

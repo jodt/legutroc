@@ -23,16 +23,18 @@ export function TradesBar({
       </div>
       <div className="trade">
         {trades.map((trade, index) => {
-          return (
-            <Vegetable
-              exchange={true}
-              deletable={true}
-              key={trade.id}
-              products={trade}
-              Tradeindex={index}
-              removeTrade={removeTrade}
-            />
-          );
+          if (products.id === trade.prodId)
+            return (
+              <Vegetable
+                exchange={true}
+                deletable={true}
+                key={trade.id}
+                products={trade}
+                Tradeindex={index}
+                removeTrade={removeTrade}
+                onHover={onHover}
+              />
+            );
         })}
       </div>
     </div>
