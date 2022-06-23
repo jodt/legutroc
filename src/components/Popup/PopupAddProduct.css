@@ -1,5 +1,4 @@
 .popupBox {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +10,6 @@
 }
 
 .popupAddProduct {
-  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;

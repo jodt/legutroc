@@ -12,15 +12,19 @@ export function Vegetable({
   onclick,
   isSelected,
   onHover,
+  children,
 }) {
+  const [displayChildren, setDisplayChildren] = useState(false);
   const handleClick = () => {
     !exchange ? removeProduction(prodIndex) : removeTrade(Tradeindex);
   };
   const handleisHover = () => {
+    setDisplayChildren(true);
     onHover(products);
   };
 
   const handleIsNotHover = () => {
+    setDisplayChildren(false);
     onHover(null);
   };
   return (
@@ -34,6 +38,7 @@ export function Vegetable({
       onMouseEnter={onHover ? handleisHover : null}
       onMouseLeave={onHover ? handleIsNotHover : null}
     >
+      {displayChildren ? children : ''}
       <p>{products.name}</p>
       <img
         src={products.image}

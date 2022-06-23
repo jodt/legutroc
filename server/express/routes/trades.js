@@ -72,6 +72,7 @@ tradeRouter.post('/', async (req, res, next) => {
       userProductionId_1: req.body.userProductionId_1,
       userProductionId_2: req.body.userProductionId_2,
     });
+    res.sendStatus(201);
   } catch (err) {
     console.error(err);
     res.status(500).send();

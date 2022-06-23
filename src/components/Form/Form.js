@@ -9,7 +9,7 @@ export function Form({ formFields, onSubmit, id, checkpassword, required }) {
           <React.Fragment key={index}>
             {field.id && <label htmlFor={field.id}>{field.label}</label>}
             <input
-              required={!required ? false : true}
+              required={required}
               autoComplete="off"
               id={id}
               type={field.type}

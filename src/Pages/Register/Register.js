@@ -149,6 +149,7 @@ export function Register() {
             formFields={formFields}
             onSubmit={handleSubmit}
             checkpassword={checkPwd}
+            required={true}
           />
         </div>
       )}

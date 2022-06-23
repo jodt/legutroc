@@ -35,7 +35,6 @@
 }
 
 .popupTrade .results {
-  position: relative;
   width: 90%;
   height: 35%;
   display: flex;
@@ -45,27 +44,16 @@
   margin-top: 60px;
   border: solid 1px black;
   border-radius: 25px;
+  overflow-x: scroll;
 }
 
 .popupTrade .results h2 {
   position: absolute;
   transform: translateY(-130%);
 }
-.popupTrade .results .productInfos {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transform: translate(50%, 30%);
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
-  border-radius: 50px;
-  background-color: #ffffff;
-}
+
 .results .Vegetable {
+  position: static;
   width: 100px;
   height: 100px;
   cursor: pointer;
@@ -80,10 +68,25 @@
   margin: 0;
 }
 
+.popupTrade .results .productInfos {
+  position: absolute;
+  z-index: 100;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translate(50%, 60%);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+  border-radius: 50px;
+  background-color: #ffffff;
+}
+
 .popupTrade .menuButton {
   width: 30%;
   height: 50px;
-  margin-top: 10px;
+  margin: 15px 0;
   font-size: 1.2rem;
   font-family: 'Cairo', sans-serif;
   background-color: #a6fcca;

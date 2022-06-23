@@ -1,4 +1,5 @@
 const sequelize = require('../sequelize');
+const bcrypt = require('bcrypt');
 
 (async () => {
   try {
@@ -9,21 +10,21 @@ const sequelize = require('../sequelize');
         firstName: 'Philippe',
         lastName: 'Willot',
         email: '3684@holbertonschool.com',
-        password: 'dfkdsfsd87Df',
+        password: bcrypt.hashSync('philippe', 10),
         city: 'Valenciennes',
       },
       {
         firstName: 'Joël',
         lastName: 'Dumortier',
         email: '3233@holbertonschool.com',
-        password: 'ieozj48dss6',
+        password: bcrypt.hashSync('joel', 10),
         city: 'Béthune',
       },
       {
         firstName: 'Marion',
         lastName: 'Declerck',
         email: 'mxrion.d@hotmail.com',
-        password: 'uiaziaeropez778',
+        password: bcrypt.hashSync('marion', 10),
         city: 'Beuvrages',
       },
     ]);

@@ -57,7 +57,12 @@ export function Login({ onlogin, userPropriety }) {
         <h1>LEGU'TROC</h1>
       </div>
       <div className="login">
-        <Form onSubmit={handleSubmit} label={false} formFields={formFields} />
+        <Form
+          onSubmit={handleSubmit}
+          label={false}
+          formFields={formFields}
+          required={true}
+        />
         <Link to="/register" className="registerLink">
           Créer un compte
         </Link>

@@ -7,7 +7,7 @@ import { retrieveAllVegetables } from '../../api/vegetables/getAllVegetables';
 import { PopupAddProduct } from './PopupAddProduct';
 import { PopupTrade } from './PopupTrade';
 
-export function PopupAddProductContainer({
+export function PopupContainer({
   onclick,
   onDisplay,
   productions,

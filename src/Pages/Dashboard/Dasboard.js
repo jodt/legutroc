@@ -1,13 +1,14 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { retrieveProd } from '../../api/production/retrieveProd';
-import { clearProd } from '../../api/production/clearProd';
+import React, { useContext, useEffect, useState } from 'react';
 import { addProd } from '../../api/production/addProd';
 import { Button } from '../../components/Button/Button';
+import { clearProd } from '../../api/production/clearProd';
+import { deleteTrade } from '../../api/trades/deleteTrade';
+import { getTrades } from '../../api/trades/getTrades';
+import { PopupContainer } from '../../components/Popup/PopupContainer';
+import { retrieveProd } from '../../api/production/retrieveProd';
 import { TradesBar } from '../../components/TradesBar/TradesBar';
 import { UserContext } from '../../contexts/userContext';
 import './Dashboard.css';
-import { PopupAddProductContainer } from '../../components/PopuAddProduct/PopuAddProductContainer';
-import { getTrades } from '../../api/trades/getTrades';
 
 export function Dashboard() {
   const user = useContext(UserContext);
@@ -15,7 +16,8 @@ export function Dashboard() {
   const [prodIdToClear, setProdIdToClear] = useState(null);
   const [vegetableToAdd, setVegetableToAdd] = useState(null);
   const [trades, setTrades] = useState([]);
-  const [onHover, setOnHover] = useState(false);
+  const [tradeIdToClear, setTradeIdToClear] = useState(null);
+  //const [onHover, setOnHover] = useState(false);
   const [vegetableInfos, setVegetableInfos] = useState({
     userfirstName: '',
     userCIty: '',
@@ -84,6 +86,12 @@ export function Dashboard() {
     }
   }, [prodIdToClear]);
 
+  useEffect(() => {
+    if (tradeIdToClear) {
+      deleteTrade(tradeIdToClear);
+    }
+  }, [tradeIdToClear]);
+
   /*useEffect(() => {
     const trade = true;
     if (trade) {
@@ -126,6 +134,7 @@ export function Dashboard() {
   };
 
   const removeTrade = targetIndex => {
+    setTradeIdToClear(trades[targetIndex].id);
     setTrades(prev => prev.filter((item, index) => index !== targetIndex));
   };
 
@@ -154,7 +163,7 @@ export function Dashboard() {
   return (
     <div className="Dashboard">
       {popUp.display && (
-        <PopupAddProductContainer
+        <PopupContainer
           onclick={addProduction}
           onDisplay={displayPopup}
           productions={productions}
