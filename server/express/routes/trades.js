@@ -107,4 +107,27 @@ tradeRouter.delete('/:tradeId/delete', async (req, res, next) => {
   }
 });
 
+tradeRouter.post('/exist', async (req, res, next) => {
+  try {
+    const trade = await models.trades.findOne({
+      where: {
+        [Op.or]: [
+          {
+            userProductionId_1: req.body.production1,
+            userProductionId_2: req.body.production2,
+          },
+          {
+            userProductionId_1: req.body.production2,
+            userProductionId_2: req.body.production1,
+          },
+        ],
+      },
+    });
+    trade ? res.sendStatus(200) : res.sendStatus(404);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = tradeRouter;
