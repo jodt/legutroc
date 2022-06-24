@@ -1,4 +1,5 @@
 const { models } = require('../sequelize');
+const { Op } = require('sequelize');
 
 const getIdParam = (req, res, next) => {
   const id = req.params.id;
@@ -12,7 +13,9 @@ const getProduction = async (req, res, next) => {
   try {
     const id = Number(req.params.userId);
     const production = await models.userProduction.findAll({
-      where: { userId: id },
+      where: {
+        [Op.and]: [{ userId: id }, { status: { [Op.is]: null } }],
+      },
     });
     return copyOfObject(production);
   } catch (err) {
