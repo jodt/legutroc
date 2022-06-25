@@ -1,5 +1,6 @@
 const express = require('express');
 const { models } = require('../../sequelize');
+const { Op } = require('sequelize');
 
 const {
   getProduction,
@@ -23,7 +24,9 @@ userProductionRouter.get('/search', async (req, res, next) => {
   }
 
   try {
-    const production = await models.userProduction.findAll();
+    const production = await models.userProduction.findAll({
+      where: { status: { [Op.is]: null } },
+    });
     const productionDetailled = await getProductionDetailled(
       copyOfObject(production)
     );
