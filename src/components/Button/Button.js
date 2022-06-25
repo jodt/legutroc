@@ -1,4 +1,5 @@
 import React from 'react';
+import './Button.css';
 
 export function Button({ nameButton, onclick, style, disabled, name }) {
   const handeClick = e => {

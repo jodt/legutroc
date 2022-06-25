@@ -25,6 +25,7 @@ export function PopupTrade({
     productId: '',
   });
   const [tradeAlreadyExist, setTradeAlreadyExist] = useState(false);
+  const [registeredTrade, setRegisteredTrade] = useState(false);
 
   const fetchprod = (city, term) => {
     search(city, term).then(value => {
@@ -48,14 +49,16 @@ export function PopupTrade({
     });
   };
 
-  const clearVegetablesSelected = () => {
+  const clearSelects = () => {
+    setTradeAlreadyExist(false);
+    setRegisteredTrade(false);
+    setSearchTerm(prev => ({ ...prev, term: '', city: '' }));
     setvegetable1ForTrade(prev => ({ ...prev, productId: '' }));
     setvegetable2ForTrade(prev => ({ ...prev, productId: '' }));
   };
 
   useEffect(() => {
     if (vegetable1ForTrade.productId && vegetable2ForTrade.productId) {
-      console.log(vegetable1ForTrade.productId, vegetable2ForTrade.productId);
       checkIfTradeExist(
         vegetable1ForTrade.productId,
         vegetable2ForTrade.productId
@@ -66,6 +69,15 @@ export function PopupTrade({
       });
     }
   }, [vegetable1ForTrade, vegetable2ForTrade]);
+
+  useEffect(() => {
+    if (tradeAlreadyExist || registeredTrade) {
+      const timer = setTimeout(() => {
+        clearSelects();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [tradeAlreadyExist, registeredTrade]);
 
   useEffect(() => {
     fetchprod(searchTerm.city, searchTerm.term);
@@ -95,6 +107,23 @@ export function PopupTrade({
     }));
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    setSearchResult([]);
+    clearSelects();
+    fetchprod(searchTerm.city, searchTerm.term);
+  };
+
+  const handleClick = () => {
+    postTrade(vegetable1ForTrade.productId, vegetable2ForTrade.productId).then(
+      response => {
+        if (response.status === 201) {
+          setRegisteredTrade(true);
+        }
+      }
+    );
+  };
+
   const formFields = [
     {
       id: 'search',
@@ -118,21 +147,23 @@ export function PopupTrade({
     },
   ];
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    setTradeAlreadyExist(false);
-    clearVegetablesSelected();
-    setSearchResult([]);
-    fetchprod(searchTerm.city, searchTerm.term);
-  };
-
-  const handleClick = () => {
-    postTrade(vegetable1ForTrade.productId, vegetable2ForTrade.productId);
-    closePopup();
-  };
-
   return (
     <div className="popupTrade">
+      {tradeAlreadyExist ? (
+        <p className="tradeAllReadyExist">Vous avez déjà proposé cet échange</p>
+      ) : (
+        ''
+      )}
+      {registeredTrade ? (
+        <p
+          className="tradeAllReadyExist"
+          style={{ backgroundColor: '#a6fcca', color: '#434343' }}
+        >
+          Echange enregistré avec succés
+        </p>
+      ) : (
+        ''
+      )}
       <h1>Proposer un échange</h1>
       <Form
         label={true}
@@ -166,7 +197,6 @@ export function PopupTrade({
               </Vegetable>
             );
           })}
-          {tradeAlreadyExist ? <p>Vous avez déjà proposé cet échange</p> : ''}
         </div>
         <div className="results">
           <h2>Mon produit à échanger</h2>
@@ -186,7 +216,8 @@ export function PopupTrade({
           name={'valider'}
           nameButton={'Valider'}
           disabled={
-            !(vegetable1ForTrade.productId && vegetable2ForTrade.productId)
+            !(vegetable1ForTrade.productId && vegetable2ForTrade.productId) ||
+            tradeAlreadyExist
           }
           onclick={handleClick}
         />

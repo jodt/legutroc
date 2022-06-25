@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { addProd } from '../../api/production/addProd';
 import { Button } from '../../components/Button/Button';
+import { acceptedTrade } from '../../api/trades/ acceptedTrade';
+import { changeProductionStatus } from '../../api/production/changeProductionStatus';
 import { clearProd } from '../../api/production/clearProd';
 import { deleteTrade } from '../../api/trades/deleteTrade';
 import { getTrades } from '../../api/trades/getTrades';
@@ -9,9 +11,11 @@ import { retrieveProd } from '../../api/production/retrieveProd';
 import { TradesBar } from '../../components/TradesBar/TradesBar';
 import { UserContext } from '../../contexts/userContext';
 import './Dashboard.css';
+import { Link, useNavigate } from 'react-router-dom';
 
-export function Dashboard() {
+export function Dashboard({ onlogout }) {
   const user = useContext(UserContext);
+  const navigate = useNavigate();
   const [productions, setProductions] = useState([]);
   const [prodIdToClear, setProdIdToClear] = useState(null);
   const [vegetableToAdd, setVegetableToAdd] = useState(null);
@@ -24,6 +28,7 @@ export function Dashboard() {
     description: '',
   });
   const [popUp, setPopup] = useState({ display: false, popupName: '' });
+  const [idProdStatusChange, setIdProdStatusChange] = useState(null);
 
   const fetchDataTrades = async userIdProd => {
     getTrades(userIdProd).then(value => {
@@ -81,6 +86,20 @@ export function Dashboard() {
   }, [vegetableToAdd]);
 
   useEffect(() => {
+    if (idProdStatusChange) {
+      changeProductionStatus(idProdStatusChange).then(response => {
+        if (response === 200) {
+          fetchDataProd();
+        }
+      });
+    }
+    return () => {
+      setProductions([]);
+      setTrades([]);
+    };
+  }, [idProdStatusChange]);
+
+  useEffect(() => {
     if (prodIdToClear) {
       clearProd(user.id, prodIdToClear);
     }
@@ -91,6 +110,13 @@ export function Dashboard() {
       deleteTrade(tradeIdToClear);
     }
   }, [tradeIdToClear]);
+
+  /*useEffect(() => {
+    if (idProdStatusChange) {
+      acceptedTrade(idProdStatusChange.id);
+      changeProductionStatus(idProdStatusChange.prodId);
+    }
+  }, [idProdStatusChange]);
 
   /*useEffect(() => {
     const trade = true;
@@ -138,6 +164,14 @@ export function Dashboard() {
     setTrades(prev => prev.filter((item, index) => index !== targetIndex));
   };
 
+  const tradeAccepted = targetIndex => {
+    acceptedTrade(trades[targetIndex].id).then(response => {
+      if (response === 200) {
+        setIdProdStatusChange(trades[targetIndex].prodId);
+      }
+    });
+  };
+
   const displayVegetableInfos = target => {
     if (target) {
       const { userfirstName, userlastName, userCIty, description } = target;
@@ -152,6 +186,15 @@ export function Dashboard() {
       setVegetableInfos({});
     }
   };
+
+  const goToMyAccount = () => {
+    navigate('../myaccount', { replace: true });
+  };
+
+  const goToMyTrades = () => {
+    navigate('../mytrades', { replace: true });
+  };
+
   /*const addProduction = ({ vegetable }) => {
     setProductions(prev => {
       if prev.includes(vegetable.id) {
@@ -179,7 +222,7 @@ export function Dashboard() {
       <div className="body">
         <div className="aside">
           <div className="Menu">
-            <Button nameButton={'Mon compte'} />
+            <Button nameButton={'Mon compte'} onclick={goToMyAccount} />
             <Button
               name={'addProduct'}
               nameButton={'Ajouter un produit'}
@@ -189,6 +232,13 @@ export function Dashboard() {
               name={'tradeProduct'}
               nameButton={'Proposer un échange'}
               onclick={displayPopup}
+            />
+            <Button nameButton={'Mes échanges'} onclick={goToMyTrades} />
+            <Button
+              nameButton={'Se déconnecter'}
+              onclick={() => {
+                onlogout(false);
+              }}
             />
           </div>
           <div className="informations">
@@ -225,6 +275,7 @@ export function Dashboard() {
                 prodIndex={index}
                 removeProduction={removeProduction}
                 removeTrade={removeTrade}
+                acceptedTrade={tradeAccepted}
                 onHover={displayVegetableInfos}
               />
             );

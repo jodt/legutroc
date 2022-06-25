@@ -8,6 +8,7 @@ export function TradesBar({
   prodIndex,
   removeProduction,
   removeTrade,
+  acceptedTrade,
   onHover,
 }) {
   return (
@@ -33,6 +34,7 @@ export function TradesBar({
                 Tradeindex={index}
                 removeTrade={removeTrade}
                 onHover={onHover}
+                acceptedTrade={acceptedTrade}
               />
             );
         })}

@@ -3,10 +3,22 @@
   align-items: center;
   background-color: #74c999;
   font-family: 'Cairo', sans-serif;
+  /*font-size: calc(0.5rem + 0.8vmin);*/
 }
 h1 {
   font-family: 'Mochiy Pop One', sans-serif;
 }
-label {
+/*label {
   font-size: 1.2rem;
+}*/
+
+@media only screen and (max-width: 1020px) {
+  .App,
+  h1 {
+    font-size: calc(1.2rem + 1vmin);
+  }
+
+  label {
+    font-size: calc(0.5rem + 0.5vmin);
+  }
 }

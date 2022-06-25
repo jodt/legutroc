@@ -10,7 +10,7 @@ export const postTrade = async (prodId1, prodId2) => {
         userProductionId_2: prodId2,
       }),
     });
-    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }

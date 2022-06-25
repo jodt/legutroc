@@ -9,14 +9,18 @@ export function Vegetable({
   Tradeindex,
   removeProduction,
   removeTrade,
+  acceptedTrade,
   onclick,
   isSelected,
   onHover,
   children,
 }) {
   const [displayChildren, setDisplayChildren] = useState(false);
-  const handleClick = () => {
+  const handleClickDelete = () => {
     !exchange ? removeProduction(prodIndex) : removeTrade(Tradeindex);
+  };
+  const handleClickAccept = () => {
+    acceptedTrade(Tradeindex);
   };
   const handleisHover = () => {
     setDisplayChildren(true);
@@ -47,12 +51,12 @@ export function Vegetable({
         width="50px"
       ></img>
       {deletable && (
-        <button className="delete" type="button" onClick={handleClick}>
+        <button className="delete" type="button" onClick={handleClickDelete}>
           X
         </button>
       )}
       {exchange && (
-        <button className="accept" type="button">
+        <button className="accept" type="button" onClick={handleClickAccept}>
           √
         </button>
       )}

@@ -1,4 +1,5 @@
 .register {
+  text-align: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -55,4 +56,16 @@
 
 .onRegister p {
   font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .formBox {
+    width: 90%;
+    height: 75vh;
+    border-radius: 100px 25px;
+  }
+
+  .formBox input[type='submit'] {
+    font-size: calc(0.5rem + 0.5vmin);
+  }
 }

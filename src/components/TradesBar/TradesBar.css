@@ -33,3 +33,16 @@
   border-radius: 20px;
   overflow-x: scroll;
 }
+
+@media only screen and (max-width: 1024px) {
+  .tradesBar {
+    height: 30%;
+    padding: 5px;
+  }
+  .tradesBar p {
+    font-size: 0.8rem;
+  }
+  .tradesBar .production {
+    width: 20%;
+  }
+}
