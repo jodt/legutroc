@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# Portfolio project - Legu'troc
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Legu'troc is our portfolio project concluding our formation at Holberton School. It's a vegetable sharing full-stack app.
 
-In the project directory, you can run:
+We were free to choose the project of our choice and also the technologies.
 
-### `npm start`
+...
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Please before using our application, read carefully the installation menu.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Table of Contents
 
-### `npm test`
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Functionalities](#functionalities)
+- [Front-end](#front-end)
+- [Back-end](#back-end)
+  - [Database](#Database)
+  - [API](#API)
+- [Credits](#credits)
+- [Authors](#Authors)
+- [License](#license)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We made this project on **Ubuntu 20.04 LTS.**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. In order to run our app, please clone the repo and run these commands on your terminal.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+cd legutroc/
+npm install
+```
 
-### `npm run eject`
+2. Please install mysql-server on your machine if it's not already the case
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+sudo apt-get install mysql-server
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Then create a empty database called legutroc and change the root password to an empty string.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+($) mysql
+mysql> CREATE DATABASE IF NOT EXISTS legutroc;
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. (Optional) Run the setup file in order to fill the database with fake data by running :
 
-## Learn More
+```
+node server/mysql/setup.js
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Finally, in order to start the application, you have to open 2 terminals.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+On each terminal run:
 
-### Code Splitting
+Terminal #1 (This terminal starts the React application listening on port 3000)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+npm start
+```
 
-### Analyzing the Bundle Size
+Terminal #2 (This terminal starts the Express server (API) on port 4000)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+npm run server
+```
 
-### Making a Progressive Web App
+You should now have the app running on your brower on [localhost](http://localhost:3000).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+If you have skipped step #3, there'll be no users set.
+You'll have to create an user first before starting using the app.
 
-### Advanced Configuration
+Otherwise, we already provided 2 accounts in the setup file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Account 1** :\
+email : test@test.com\
+password : test
 
-### Deployment
+**Account 2** :\
+email : test2@test.com\
+password : test2
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+You can now use the app !
 
-### `npm run build` fails to minify
+## Functionalities
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+List of functionnalities we have built...
+
+## Front-end
+
+More details on the front-end part of the app...
+
+## Back-end
+
+### Database
+
+More details on MySQL and Sequelize.
+
+### API
+
+Description: ...
+
+#### Routes
+
+Details of all routes coming here...
+
+## Credits
+
+List any third party librairies used here.
+
+## Authors
+
+Made by :
+
+[Joël Dumortier](https://github.com/jodt/) (Front-end)
+
+[Philippe Willot](https://github.com/phwillot/) (Back-end)
+
+## License
+
+Not defined yet.
