@@ -23,6 +23,20 @@ const getProduction = async (req, res, next) => {
   }
 };
 
+const getProductionAccepted = async (req, res, next) => {
+  try {
+    const id = Number(req.params.userId);
+    const production = await models.userProduction.findAll({
+      where: {
+        [Op.and]: [{ userId: id }, { status: 'Accepted' }],
+      },
+    });
+    return copyOfObject(production);
+  } catch (err) {
+    res.send({ message: 'Not a valid id' });
+  }
+};
+
 const getProductionDetailled = async production => {
   try {
     const productionDetailled = await Promise.all(
@@ -100,4 +114,5 @@ module.exports = {
   copyOfObject,
   capitalizeFirstLetter,
   lowerCaseAllKeys,
+  getProductionAccepted,
 };

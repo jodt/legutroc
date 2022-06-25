@@ -3,6 +3,7 @@ const { models } = require('../../sequelize');
 
 const {
   getProduction,
+  getProductionAccepted,
   getProductionDetailled,
   checkIfUserExists,
   checkIfAlreadyInProduction,
@@ -54,6 +55,20 @@ userProductionRouter.get(
   async (req, res, next) => {
     try {
       const production = await getProduction(req, res);
+      const productionDetailled = await getProductionDetailled(production);
+      res.status(200).send({ production: productionDetailled });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+);
+
+userProductionRouter.get(
+  '/:userId/accepted',
+  checkIfUserExists,
+  async (req, res, next) => {
+    try {
+      const production = await getProductionAccepted(req, res);
       const productionDetailled = await getProductionDetailled(production);
       res.status(200).send({ production: productionDetailled });
     } catch (err) {
