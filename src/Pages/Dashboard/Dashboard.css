@@ -36,6 +36,10 @@
   overflow-y: scroll;
 }
 
+.Dashboard .body .DashboardlPanel::-webkit-scrollbar {
+  display: none;
+}
+
 .Dashboard .body .aside {
   display: flex;
   flex-direction: column;

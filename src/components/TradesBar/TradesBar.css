@@ -34,6 +34,10 @@
   overflow-x: scroll;
 }
 
+.trade::-webkit-scrollbar {
+  display: none;
+}
+
 @media only screen and (max-width: 1024px) {
   .tradesBar {
     height: 30%;
