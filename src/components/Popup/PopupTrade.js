@@ -14,6 +14,7 @@ export function PopupTrade({
   onHover,
   vegetableInfos,
   closePopup,
+  children,
 }) {
   const user = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState({ term: '', city: '' });
@@ -165,6 +166,7 @@ export function PopupTrade({
         ''
       )}
       <h1>Proposer un échange</h1>
+      {children}
       <Form
         label={true}
         formFields={formFields}

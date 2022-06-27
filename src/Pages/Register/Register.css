@@ -61,6 +61,7 @@
 @media only screen and (max-width: 1024px) {
   .formBox {
     width: 90%;
+    max-width: 600px;
     height: 75vh;
     border-radius: 100px 25px;
   }

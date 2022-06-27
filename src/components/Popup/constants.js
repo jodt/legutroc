@@ -5,7 +5,8 @@ export const styleCloseBtn = {
   borderRadius: '50px 50px',
   backgroundColor: '#c93404',
   position: 'absolute',
-  transform: 'translate(380px,-10px)',
+  right: -20,
+  top: -20,
   color: 'white',
   fontSize: '2rem',
 };

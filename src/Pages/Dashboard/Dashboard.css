@@ -20,7 +20,7 @@
 }
 .Dashboard .body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: space-around;
 }
@@ -97,47 +97,39 @@
 }
 
 @media only screen and (max-width: 1024px) {
+  .Dashboard {
+    justify-content: flex-start;
+  }
   .Dashboard h1 {
-    margin: 10px;
+    margin: 15px;
   }
   .Dashboard .body {
     flex-direction: column-reverse;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+  }
+  .Dashboard .body .aside {
+    flex-direction: row;
+    width: 90%;
+    height: 50%;
+  }
+  .Dashboard .body h2 {
+    font-size: 1rem;
+  }
+  .Dashboard .body .aside .informations,
+  .Dashboard .body .aside .Menu {
+    width: 45%;
+    height: 90%;
+  }
+  .Dashboard .body .aside .Menu .menuButton {
+    font-size: 0.6rem;
+  }
+  .informations .infoContent {
+    height: 70%;
+    font-size: 1rem;
   }
   .Dashboard .body .DashboardlPanel {
     width: 90%;
-    height: 30%;
-    justify-content: flex-start;
-  }
-  .Dashboard .body .aside {
-    flex-direction: column-reverse;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    height: 50%;
-  }
-  .Dashboard .body .aside .informations {
-    margin: 5px;
-    width: 90%;
-    height: 50%;
-    border-radius: 50px;
-  }
-
-  .informations .infoContent {
-    width: 90%;
-    height: 60%;
-    border-radius: 50px;
-    font-size: 0.8rem;
-  }
-  .Dashboard .body .aside .informations h2 {
-    font-size: 0.8rem;
-  }
-  .Dashboard .body .aside .Menu {
-    width: 90%;
-    height: 35%;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    height: 40%;
   }
 }

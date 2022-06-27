@@ -27,6 +27,16 @@
   font-weight: bold;
 }
 
+/*.Vegetable img {
+  width: 30px;
+  height: 30px;
+}*/
+
+.Vegetable p {
+  text-align: center;
+  margin: 0;
+}
+
 .delete {
   background-color: #c93404;
   right: -5px;

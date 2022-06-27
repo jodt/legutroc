@@ -10,6 +10,7 @@
 }
 
 .popupAddProduct {
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -46,10 +47,11 @@
   width: 30px;
   height: 30px;
 }
-.allProducts .Vegetable p {
+/*.allProducts .Vegetable p {
   text-align: center;
   margin: 0;
-}
+}*/
+
 .description {
   width: 90%;
   height: 35%;
@@ -71,10 +73,44 @@
   border-radius: 100px;
   cursor: pointer;
 }
-.description .menuButton:disabled {
-  opacity: 0.5;
-}
+/*.description .menuButton:disabled {
+  opacity: 0.5
+}*/
 
 .description textarea:focus {
   outline: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .popupAddProduct {
+    max-width: 400px;
+  }
+  .Dashboard .popupAddProduct h1 {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  .allProducts {
+    justify-content: center;
+  }
+  .allProducts .Vegetable {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .allProducts .Vegetable p {
+    font-size: 0.7rem;
+  }
+
+  .allProducts .Vegetable img {
+    width: 20px;
+    height: 20px;
+  }
+  .textaera {
+    width: 90%;
+  }
+  .popupAddProduct .menuButton {
+    margin-top: 10px;
+    height: 40px;
+  }
 }

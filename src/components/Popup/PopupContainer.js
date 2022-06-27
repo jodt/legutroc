@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
-import { Vegetable } from '../Vegetable/Vegetable';
 import './PopupAddProduct.css';
 import { styleCloseBtn } from './constants';
 import { retrieveAllVegetables } from '../../api/vegetables/getAllVegetables';
@@ -63,7 +62,6 @@ export function PopupContainer({
   return (
     <div className="popupBox">
       <div className="popupAddProduct">
-        <Button style={styleCloseBtn} nameButton={'X'} onclick={onDisplay} />
         {popupName === 'addProduct' ? (
           <PopupAddProduct
             errorMessage={errorMessage}
@@ -73,7 +71,13 @@ export function PopupContainer({
             addDescription={addDescription}
             selectVegetable={selectVegetable}
             isSelectedId={isSelectedId}
-          />
+          >
+            <Button
+              style={styleCloseBtn}
+              nameButton={'X'}
+              onclick={onDisplay}
+            />
+          </PopupAddProduct>
         ) : (
           <PopupTrade
             productions={productions}
@@ -82,7 +86,13 @@ export function PopupContainer({
             selectVegetable={selectVegetable}
             isSelectedId={isSelectedId}
             closePopup={closePopup}
-          />
+          >
+            <Button
+              style={styleCloseBtn}
+              nameButton={'X'}
+              onclick={onDisplay}
+            />
+          </PopupTrade>
         )}
 
         {/*<h1>Ajouter un produit</h1>

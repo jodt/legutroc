@@ -8,9 +8,9 @@
 h1 {
   font-family: 'Mochiy Pop One', sans-serif;
 }
-/*label {
+label {
   font-size: 1.2rem;
-}*/
+}
 
 @media only screen and (max-width: 1020px) {
   .App,

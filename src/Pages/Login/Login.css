@@ -19,8 +19,8 @@
 
 .login {
   margin: auto;
-  height: 350px;
-  width: 300px;
+  height: 400px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,3 +51,12 @@
 /*.loginPage form:invalid input[type='submit'] {
   opacity: 0.5;
 }*/
+
+@media only screen and (max-width: 1024px) {
+  .login {
+    width: 80%;
+    max-width: 400px;
+    height: 50vh;
+    max-height: 500px;
+  }
+}

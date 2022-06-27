@@ -2,7 +2,6 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Login } from '../../Pages/Login/Login';
-import { ProtectedRoute } from '../../routes/ProtectedRoute';
 import { Dashboard } from '../../Pages/Dashboard/Dasboard';
 import { Register } from '../../Pages/Register/Register';
 import { UserContext } from '../../contexts/userContext';
