@@ -48,11 +48,12 @@ const getProductionDetailled = async production => {
           production.vegetable = await models.vegetables.findOne({
             where: { id: production.vegetableId },
           });
-          production.user = (({ id, firstName, lastName, city }) => ({
+          production.user = (({ id, firstName, lastName, city, email }) => ({
             id,
             firstName,
             lastName,
             city,
+            email,
           }))(production.user);
           delete production['userId'];
           delete production['vegetableId'];

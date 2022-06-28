@@ -3,6 +3,8 @@ const { models } = require('../sequelize');
 const { checkUser } = require('./encrypt');
 const app = express();
 
+require('dotenv').config();
+
 // Middlewares
 app.use(require('cors')());
 app.use(require('morgan')('dev'));

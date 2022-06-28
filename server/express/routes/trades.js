@@ -1,9 +1,20 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
 const { models } = require('../../sequelize');
 const { Op } = require('sequelize');
 const { getProductionDetailled } = require('../helpers');
 
 const tradeRouter = express.Router();
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.laposte.net',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+});
+
+console.log(process.env.PASSWORD);
 
 tradeRouter.get('/', async (req, res, next) => {
   res.status(200).send(await models.trades.findAll());
@@ -72,6 +83,7 @@ tradeRouter.post('/', async (req, res, next) => {
       userProductionId_1: req.body.userProductionId_1,
       userProductionId_2: req.body.userProductionId_2,
     });
+
     res.sendStatus(201);
   } catch (err) {
     console.error(err);
@@ -80,6 +92,37 @@ tradeRouter.post('/', async (req, res, next) => {
 });
 
 tradeRouter.put('/:tradeId/status', async (req, res, next) => {
+  const trade = await models.trades.findOne({
+    where: { id: req.params.tradeId },
+  });
+  const productionOne = await models.userProduction.findOne({
+    where: { id: trade.userProductionId_1 },
+  });
+  const productionTwo = await models.userProduction.findOne({
+    where: { id: trade.userProductionId_2 },
+  });
+  const productionDetailled = await getProductionDetailled([
+    productionOne,
+    productionTwo,
+  ]);
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: productionDetailled[1].user.email,
+    subject: 'Votre échange a été accepté',
+    text: `${productionDetailled[0].user.firstName} a accepté votre échange.\n 
+Votre produit: ${productionDetailled[0].vegetable.name} 
+Son produit: ${productionDetailled[1].vegetable.name}
+Contactez le à cette adresse : ${productionDetailled[0].user.email} pour procéder à l'échange.\n
+L'équipe Légu'troc
+`,
+  };
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
   try {
     const trade = await models.trades.findOne({
       where: { id: req.params.tradeId },
