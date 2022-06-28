@@ -28,9 +28,9 @@ We decided these roles because they correspond to what we want to specialize.
 ## Table of Contents
 
 - [Technologies](#technologies)
-  - [Architecture](#archictecture)
-- [Installation](#installation)
 - [Functionalities](#functionalities)
+- [Architecture](#archictecture)
+- [Installation](#installation)
 - [Front-end](#front-end)
 - [Back-end](#back-end)
   - [Database](#Database)
@@ -45,7 +45,11 @@ Back-end : Node.js (Express), Sequelize with MySQL
 
 We used React for the dynamic aspect of the page, and Express to stay in the JavaScript environment and in the MERN stack.
 
-### Archictecture
+## Functionalities
+
+List of functionnalities we have built... ** TO DO **
+
+## Archictecture
 
 ![Architecture of project](https://i.imgur.com/V8QcUxm.png)
 
@@ -112,10 +116,6 @@ email : test2@test.com\
 password : test2
 
 You can now use the app !
-
-## Functionalities
-
-List of functionnalities we have built...
 
 ## Front-end
 
