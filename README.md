@@ -2,17 +2,33 @@
 
 ## Description
 
-Legu'troc is our portfolio project concluding our formation at Holberton School. It's a vegetable sharing full-stack app.
-
+Legu'troc is our portfolio project concluding our formation at Holberton School. It's a vegetable sharing full-stack app.\
 We were free to choose the project of our choice and also the technologies.
 
-...
+The goal of the project was to create an app which would allow to :
 
-Please before using our application, read carefully the installation menu.
+- Fight against vegetable waste
+- Win / Win for the 2 traders
+- Create social connection
+
+Otherwise our project will not solve:
+
+- food self-sufficiency, users will still need to obtain supplies from shops, in particular for varieties of fruits and vegetables not cultivated in our climates.
+
+Our project can help every type of user who have an excess of culture and who wants to get something else in return.\
+The most targeted users will be individuals.
+
+### Team members
+
+[Joël Dumortier](https://github.com/jodt/) (Front-end)\
+[Philippe Willot](https://github.com/phwillot/) (Back-end)
+
+We decided these roles because they correspond to what we want to specialize.
 
 ## Table of Contents
 
 - [Technologies](#technologies)
+  - [Architecture](#archictecture)
 - [Installation](#installation)
 - [Functionalities](#functionalities)
 - [Front-end](#front-end)
@@ -20,10 +36,18 @@ Please before using our application, read carefully the installation menu.
   - [Database](#Database)
   - [API](#API)
 - [Credits](#credits)
-- [Authors](#Authors)
 - [License](#license)
 
 ## Technologies
+
+Front-end : HTML, CSS, JavaScript (React)\
+Back-end : Node.js (Express), Sequelize with MySQL
+
+We used React for the dynamic aspect of the page, and Express to stay in the JavaScript environment and in the MERN stack.
+
+### Archictecture
+
+![Architecture of project](https://i.imgur.com/V8QcUxm.png)
 
 ## Installation
 
@@ -101,27 +125,62 @@ More details on the front-end part of the app...
 
 ### Database
 
-More details on MySQL and Sequelize.
+![Database schema](https://i.imgur.com/8Qg3edS.png)
 
 ### API
 
-Description: ...
+Base URL of the API: localhost:4000
 
-#### Routes
+#### **Users routes**
 
-Details of all routes coming here...
+- **GET** - /api/users - Return all the users
+- **GET** - /api/users/:userId - Return info about an user based on userId param
+- **POST** - /api/users - Creates an user based on the body
+  - Before creating, check if the email already exists in the database
+- **PUT** - /api/users/:userId/password - Change the password of an user
+- **PUT** - /api/users/:userId/city - Change the city of an user
+- **DELETE** - /api/users/:userId - Deletes an user
+
+#### **Vegetables routes**
+
+- **GET** - /api/vegetables - Return all the vegetables
+- **GET** - /api/vegetables/:vegetableId - Return info about a vegetables based on vegetableId param
+- **POST** - /api/vegetables - Creates a vegetable
+- **DELETE** - /api/vegetables/:vegetableId - Deletes a vegetable
+
+#### **userProduction routes**
+
+- **GET** - /api/userProduction/search - Return all the production filtered based on the query params (if no params return all the production)
+
+  - Params: city and vegetable
+
+- **GET** - /api/userProduction/:userId - Return all the production based on the userId param
+
+- **GET** - /api/userProduction/:userId/accepted - Return all the production with the status accepted based on the userId param
+
+- **POST** - /api/userProduction/:userId - Add a production to an user
+
+- **DELETE** - /api/userProduction/:userId/:productionId - Deletes a production to an user
+
+- **PUT** - /api/userProduction/:productionId/status - Changes the status of a production to accepted
+
+#### **Trades routes**
+
+- **GET** - /api/trades - Return all the trades for every user
+
+- **GET** - /api/trades/:userProductionId - Return all the trades associated to the userProduction id param
+
+- **POST** - /api/trades - Creates a trade between 2 productions
+
+- **PUT** - /api/trades/:tradeId/status - Changes the status of a trade to accepted
+
+- **DELETE** - /api/trades/:tradeId/delete - Deletes a trade
+
+- **POST** - /api/trades/exist - Check if there is already an existing trade between 2 productions
 
 ## Credits
 
 List any third party librairies used here.
-
-## Authors
-
-Made by :
-
-[Joël Dumortier](https://github.com/jodt/) (Front-end)
-
-[Philippe Willot](https://github.com/phwillot/) (Back-end)
 
 ## License
 
