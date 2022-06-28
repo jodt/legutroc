@@ -13,10 +13,12 @@ export function PopupAddProduct({
   addDescription,
   selectVegetable,
   isSelectedId,
+  children,
 }) {
   return (
     <>
       <h1>Ajouter un produit</h1>
+      {children}
       {errorMessage ? (
         <p className="errorMessage" style={{ color: 'red' }}>
           {' '}
@@ -41,6 +43,7 @@ export function PopupAddProduct({
       <div className="description">
         <label> Description</label>
         <textarea
+          className="textaera"
           rows="5"
           cols="50"
           value={vegetableDescription}

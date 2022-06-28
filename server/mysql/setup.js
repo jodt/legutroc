@@ -41,7 +41,7 @@ const bcrypt = require('bcrypt');
       { name: 'Endive', image: 'https://zupimages.net/up/22/24/xf63.png' },
     ]);
 
-    await sequelize.models.userProduction.bulkCreate([
+    /*await sequelize.models.userProduction.bulkCreate([
       { userId: 1, vegetableId: 1, description: '3kg de broccoli' },
       { userId: 1, vegetableId: 6, description: "1 kg d'endives" },
       { userId: 2, vegetableId: 2, description: '10kg de pommes de terres' },
@@ -54,7 +54,7 @@ const bcrypt = require('bcrypt');
       { userProductionId_1: 1, userProductionId_2: 4 },
       { userProductionId_1: 1, userProductionId_2: 3 },
       { userProductionId_1: 6, userProductionId_2: 3 },
-    ]);
+    ]);*/
   } catch (err) {
     console.error(err);
   }
