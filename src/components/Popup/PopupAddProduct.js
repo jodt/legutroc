@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Button } from '../Button/Button';
 import { Vegetable } from '../Vegetable/Vegetable';
 import './PopupAddProduct.css';
-import { styleCloseBtn } from './constants';
-import { retrieveAllVegetables } from '../../api/vegetables/getAllVegetables';
 
 export function PopupAddProduct({
   errorMessage,
@@ -21,7 +19,6 @@ export function PopupAddProduct({
       {children}
       {errorMessage ? (
         <p className="errorMessage" style={{ color: 'red' }}>
-          {' '}
           {errorMessage}
         </p>
       ) : (

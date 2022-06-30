@@ -2,9 +2,6 @@ form {
   height: 100%;
   width: 100%;
   display: flex;
-  /*flex-direction: column;
-  justify-content: center;
-  align-items: center;*/
 }
 
 input {
@@ -29,6 +26,7 @@ input:valid {
 
 input[type='submit'] {
   font-size: calc(0.8rem + 0.8vmin);
+  color: #434343;
   font-family: 'Cairo', sans-serif;
   background-color: #a6fcca;
   border: solid 2px #a6fcca;

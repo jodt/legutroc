@@ -1,6 +1,7 @@
-.popupTrade {
+.popupAddProduct .popupTrade {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -35,7 +36,7 @@
 }
 
 .popupTrade .results {
-  width: 90%;
+  width: 80%;
   height: 35%;
   display: flex;
   justify-content: flex-start;
@@ -121,6 +122,16 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
 }
 
+@media only screen and (max-height: 850px) and (max-width: 1440px) {
+  .Dashboard .popupTrade h1 {
+    font-size: 1.5rem;
+    margin: 20px;
+  }
+  .popupTrade .results {
+    height: 21%;
+    width: 80%;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .popupTrade {
     max-width: 400px;
@@ -173,7 +184,7 @@
   .textaera {
     width: 90%;
   }
-  .popupAddProduct .menuButton {
+  .popupTrade .menuButton {
     margin-top: 10px;
     height: 65px !important;
     width: 65px !important;

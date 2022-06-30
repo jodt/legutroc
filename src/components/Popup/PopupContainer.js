@@ -85,7 +85,7 @@ export function PopupContainer({
             vegetableInfos={vegetableInfos}
             selectVegetable={selectVegetable}
             isSelectedId={isSelectedId}
-            closePopup={closePopup}
+            /*closePopup={closePopup}*/
           >
             <Button
               style={styleCloseBtn}
@@ -94,43 +94,6 @@ export function PopupContainer({
             />
           </PopupTrade>
         )}
-
-        {/*<h1>Ajouter un produit</h1>
-        {errorMessage ? (
-          <p className="errorMessage" style={{ color: 'red' }}>
-            {' '}
-            {errorMessage}
-          </p>
-        ) : (
-          ''
-        )}
-        <div className="allProducts">
-          {vegetables.map((products, index) => {
-            return (
-              <Vegetable
-                key={index}
-                deletable={false}
-                products={products}
-                onclick={selectVegetable}
-                isSelected={isSelectedId}
-              />
-            );
-          })}
-        </div>
-        <div className="description">
-          <label> Description</label>
-          <textarea
-            rows="5"
-            cols="50"
-            value={vegetableDescription}
-            onChange={handleChange}
-          ></textarea>
-          <Button
-            nameButton={'Valider'}
-            onclick={addDescription}
-            disabled={errorMessage}
-          />
-        </div>*/}
       </div>
     </div>
   );

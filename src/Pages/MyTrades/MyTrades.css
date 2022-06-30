@@ -37,3 +37,18 @@ td {
 .dashboardLink:hover {
   opacity: 0.8;
 }
+
+@media only screen and (max-width: 600px) {
+  .mytrades table {
+    width: 100px;
+  }
+
+  .mytrades table thead tr {
+    width: 100%;
+  }
+  .mytrades table thead th,
+  .mytrades table tbody td {
+    padding: 5px 2px;
+    font-size: 0.9rem;
+  }
+}

@@ -39,6 +39,14 @@ const bcrypt = require('bcrypt');
       { name: 'Chou', image: 'https://zupimages.net/up/22/24/8l18.png' },
       { name: 'Poivron', image: 'https://zupimages.net/up/22/24/wx0k.png' },
       { name: 'Endive', image: 'https://zupimages.net/up/22/24/xf63.png' },
+      { name: 'Carotte', image: 'https://zupimages.net/up/22/26/gb94.png' },
+      { name: 'Radis', image: 'https://zupimages.net/up/22/26/kw3p.png' },
+      { name: 'Pomme', image: 'https://zupimages.net/up/22/26/9zu9.png' },
+      { name: 'Cerise', image: 'https://zupimages.net/up/22/26/k482.png' },
+      { name: 'Poire', image: 'https://zupimages.net/up/22/26/15pn.png' },
+      { name: 'Framboise', image: 'https://zupimages.net/up/22/26/9jm5.png' },
+      { name: 'Citrouille', image: 'https://zupimages.net/up/22/26/o11p.png' },
+      { name: 'Fraise', image: 'https://zupimages.net/up/22/26/7b26.png' },
     ]);
 
     /*await sequelize.models.userProduction.bulkCreate([

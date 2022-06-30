@@ -48,10 +48,6 @@
   opacity: 0.8;
 }
 
-/*.loginPage form:invalid input[type='submit'] {
-  opacity: 0.5;
-}*/
-
 @media only screen and (max-width: 1024px) {
   .login {
     width: 80%;

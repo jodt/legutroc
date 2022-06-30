@@ -14,8 +14,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-console.log(process.env.PASSWORD);
-
 tradeRouter.get('/', async (req, res, next) => {
   res.status(200).send(await models.trades.findAll());
 });
@@ -110,8 +108,8 @@ tradeRouter.put('/:tradeId/status', async (req, res, next) => {
     to: productionDetailled[1].user.email,
     subject: 'Votre échange a été accepté',
     text: `${productionDetailled[0].user.firstName} a accepté votre échange.\n 
-Votre produit: ${productionDetailled[0].vegetable.name} 
-Son produit: ${productionDetailled[1].vegetable.name}
+Votre produit: ${productionDetailled[1].vegetable.name} 
+Son produit: ${productionDetailled[0].vegetable.name}
 Contactez le à cette adresse : ${productionDetailled[0].user.email} pour procéder à l'échange.\n
 L'équipe Légu'troc
 `,

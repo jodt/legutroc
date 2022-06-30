@@ -11,7 +11,7 @@ import { retrieveProd } from '../../api/production/retrieveProd';
 import { TradesBar } from '../../components/TradesBar/TradesBar';
 import { UserContext } from '../../contexts/userContext';
 import './Dashboard.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function Dashboard({ onlogout }) {
   const user = useContext(UserContext);
@@ -21,7 +21,6 @@ export function Dashboard({ onlogout }) {
   const [vegetableToAdd, setVegetableToAdd] = useState(null);
   const [trades, setTrades] = useState([]);
   const [tradeIdToClear, setTradeIdToClear] = useState(null);
-  //const [onHover, setOnHover] = useState(false);
   const [vegetableInfos, setVegetableInfos] = useState({
     userfirstName: '',
     userCIty: '',
@@ -111,19 +110,14 @@ export function Dashboard({ onlogout }) {
     }
   }, [tradeIdToClear]);
 
-  /*useEffect(() => {
-    if (idProdStatusChange) {
-      acceptedTrade(idProdStatusChange.id);
-      changeProductionStatus(idProdStatusChange.prodId);
-    }
-  }, [idProdStatusChange]);
-
-  /*useEffect(() => {
-    const trade = true;
-    if (trade) {
-      setTrades([]);
-    }
-  });*/
+  const clearVegetableInfos = () => {
+    setVegetableInfos(prev => ({
+      ...prev,
+      userfirstName: '',
+      userCIty: '',
+      description: '',
+    }));
+  };
 
   const displayPopup = e => {
     setPopup(prev => ({
@@ -140,21 +134,15 @@ export function Dashboard({ onlogout }) {
   };
 
   const addProduction = target => {
-    /*const isInProduction = productions.some(
-      element => target.id === element.vegetableId
-    );
-    if (!isInProduction) {*/
     setVegetableToAdd({
       userId: user.id,
       vegetableId: target.id,
       description: target.description,
     });
-  }; /*else {
-      setErrorMessage('Ce légume est déja dans la production');
-    }
-  };*/
+  };
 
   const removeProduction = targetIndex => {
+    clearVegetableInfos();
     setProdIdToClear(productions[targetIndex].id);
     setProductions(prev => prev.filter((item, index) => index !== targetIndex));
   };
@@ -195,14 +183,6 @@ export function Dashboard({ onlogout }) {
     navigate('../mytrades', { replace: true });
   };
 
-  /*const addProduction = ({ vegetable }) => {
-    setProductions(prev => {
-      if prev.includes(vegetable.id) {
-        return prev.filter
-      }
-      [...prev, vegetable]
-    })
-  };*/
   return (
     <div className="Dashboard">
       {popUp.display && (

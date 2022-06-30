@@ -5,7 +5,6 @@ import { search } from '../../api/searchVegetables/search';
 import { UserContext } from '../../contexts/userContext';
 import { Vegetable } from '../Vegetable/Vegetable';
 import { postTrade } from '../../api/trades/postTrade';
-import { getTrades } from '../../api/trades/getTrades';
 import { checkIfTradeExist } from '../../api/trades/checkIfTradeExist';
 import './PopupTrade.css';
 
@@ -13,7 +12,7 @@ export function PopupTrade({
   productions,
   onHover,
   vegetableInfos,
-  closePopup,
+  /*closePopup,*/
   children,
 }) {
   const user = useContext(UserContext);
@@ -75,7 +74,7 @@ export function PopupTrade({
     if (tradeAlreadyExist || registeredTrade) {
       const timer = setTimeout(() => {
         clearSelects();
-      }, 2000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [tradeAlreadyExist, registeredTrade]);

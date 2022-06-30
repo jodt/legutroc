@@ -14,5 +14,3 @@
 .menuButton:disabled {
   opacity: 0.5;
 }
-@media only screen and (max-width: 1020px) {
-}

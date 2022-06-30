@@ -27,11 +27,6 @@
   font-weight: bold;
 }
 
-/*.Vegetable img {
-  width: 30px;
-  height: 30px;
-}*/
-
 .Vegetable p {
   text-align: center;
   margin: 0;
@@ -48,6 +43,28 @@
 }
 
 @media only screen and (max-width: 1024px) {
+  .Vegetable {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+  }
+
+  .Vegetable img {
+    width: 30px;
+    height: 30px;
+  }
+  .Vegetable p {
+    margin: 0;
+  }
+
+  .Vegetable button {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
   .Vegetable {
     width: 55px;
     height: 55px;

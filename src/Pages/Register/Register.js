@@ -21,13 +21,13 @@ export function Register() {
   const checkPwd = profile.password === profile.passwordConfirm;
 
   useEffect(() => {
-    if (statusCode.code == 201) {
+    if (statusCode.code === 201) {
       setOnRegister(true);
       const timer = setTimeout(() => navigate('/'), 2000);
       return () => {
         clearTimeout(timer);
       };
-    } else if (statusCode.code == 400) {
+    } else if (statusCode.code === 400) {
       setOnRegister(true);
       const timer = setTimeout(() => {
         setOnRegister(false);
