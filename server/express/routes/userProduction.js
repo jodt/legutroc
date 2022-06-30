@@ -1,8 +1,10 @@
 const express = require('express');
 const { models } = require('../../sequelize');
+const { Op } = require('sequelize');
 
 const {
   getProduction,
+  getProductionAccepted,
   getProductionDetailled,
   checkIfUserExists,
   checkIfAlreadyInProduction,
@@ -11,34 +13,35 @@ const {
 
 const userProductionRouter = express.Router();
 
-userProductionRouter.get('/', async (req, res, next) => {
-  const production = await models.userProduction.findAll();
-  const productionDetailled = await getProductionDetailled(
-    copyOfObject(production)
-  );
-  res.send({ production: productionDetailled });
-});
-
 userProductionRouter.get('/search', async (req, res, next) => {
-  const city = req.query.city;
-  const vegetableId = Number(req.query.vegetableId);
+  if (req.query.city) {
+    var city = req.query.city.charAt(0).toUpperCase() + req.query.city.slice(1);
+  }
+  if (req.query.vegetable) {
+    var vegetable =
+      req.query.vegetable.charAt(0).toUpperCase() +
+      req.query.vegetable.slice(1);
+  }
+
   try {
-    const production = await models.userProduction.findAll();
+    const production = await models.userProduction.findAll({
+      where: { status: { [Op.is]: null } },
+    });
     const productionDetailled = await getProductionDetailled(
       copyOfObject(production)
     );
-    if (!city && !vegetableId)
+    if (!city && !vegetable)
       res.status(200).send({ production: productionDetailled });
     else {
       const productionFiltered = productionDetailled.filter(production => {
-        if (!city && vegetableId) {
-          return production.vegetable.id === vegetableId;
-        } else if (!vegetableId && city) {
+        if (!city && vegetable) {
+          return production.vegetable.name === vegetable;
+        } else if (!vegetable && city) {
           return production.user.city === city;
         }
         return (
           production.user.city === city &&
-          production.vegetable.id === vegetableId
+          production.vegetable.name === vegetable
         );
       });
       res.status(200).send({ production: productionFiltered });
@@ -55,6 +58,20 @@ userProductionRouter.get(
   async (req, res, next) => {
     try {
       const production = await getProduction(req, res);
+      const productionDetailled = await getProductionDetailled(production);
+      res.status(200).send({ production: productionDetailled });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+);
+
+userProductionRouter.get(
+  '/:userId/accepted',
+  checkIfUserExists,
+  async (req, res, next) => {
+    try {
+      const production = await getProductionAccepted(req, res);
       const productionDetailled = await getProductionDetailled(production);
       res.status(200).send({ production: productionDetailled });
     } catch (err) {
@@ -97,5 +114,18 @@ userProductionRouter.delete(
     }
   }
 );
+
+userProductionRouter.put('/:productionId/status', async (req, res, next) => {
+  try {
+    const production = await models.userProduction.findOne({
+      where: { id: req.params.productionId },
+    });
+    production.status = 'Accepted';
+    production.save();
+    res.status(200).send('production updated');
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 module.exports = userProductionRouter;

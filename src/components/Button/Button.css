@@ -1,12 +1,16 @@
 .menuButton {
   color: #434343;
   font-family: 'Cairo', sans-serif;
-  font-size: 1.2rem;
-  text-align: center;
+  font-size: calc(0.5rem + 0.8vmin);
   width: 60%;
   height: 15%;
   cursor: pointer;
   border: none;
   background-color: rgb(251, 251, 251);
   border-radius: 50px;
+  box-shadow: 15px 10px 30px #98989848;
+}
+
+.menuButton:disabled {
+  opacity: 0.5;
 }

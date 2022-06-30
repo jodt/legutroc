@@ -1,4 +1,5 @@
 const { models } = require('../sequelize');
+const { Op } = require('sequelize');
 
 const getIdParam = (req, res, next) => {
   const id = req.params.id;
@@ -12,7 +13,23 @@ const getProduction = async (req, res, next) => {
   try {
     const id = Number(req.params.userId);
     const production = await models.userProduction.findAll({
-      where: { userId: id },
+      where: {
+        [Op.and]: [{ userId: id }, { status: { [Op.is]: null } }],
+      },
+    });
+    return copyOfObject(production);
+  } catch (err) {
+    res.send({ message: 'Not a valid id' });
+  }
+};
+
+const getProductionAccepted = async (req, res, next) => {
+  try {
+    const id = Number(req.params.userId);
+    const production = await models.userProduction.findAll({
+      where: {
+        [Op.and]: [{ userId: id }, { status: 'Accepted' }],
+      },
     });
     return copyOfObject(production);
   } catch (err) {
@@ -31,11 +48,12 @@ const getProductionDetailled = async production => {
           production.vegetable = await models.vegetables.findOne({
             where: { id: production.vegetableId },
           });
-          production.user = (({ id, firstName, lastName, city }) => ({
+          production.user = (({ id, firstName, lastName, city, email }) => ({
             id,
             firstName,
             lastName,
             city,
+            email,
           }))(production.user);
           delete production['userId'];
           delete production['vegetableId'];
@@ -81,7 +99,13 @@ const checkIfAlreadyInProduction = async (req, res, next) => {
   }
 };
 
+const capitalizeFirstLetter = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+const lowerCaseAllKeys = obj =>
+  Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v.toLowerCase()]));
+
 const copyOfObject = obj => JSON.parse(JSON.stringify(obj));
+
 module.exports = {
   getIdParam,
   getProduction,
@@ -89,4 +113,7 @@ module.exports = {
   checkIfUserExists,
   checkIfAlreadyInProduction,
   copyOfObject,
+  capitalizeFirstLetter,
+  lowerCaseAllKeys,
+  getProductionAccepted,
 };

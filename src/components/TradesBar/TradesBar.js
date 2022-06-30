@@ -2,12 +2,14 @@ import React from 'react';
 import { Vegetable } from '../Vegetable/Vegetable';
 import './TradesBar.css';
 
-export default function TradesBar({
+export function TradesBar({
   products,
   trades,
   prodIndex,
   removeProduction,
   removeTrade,
+  acceptedTrade,
+  onHover,
 }) {
   return (
     <div className="tradesBar">
@@ -17,20 +19,24 @@ export default function TradesBar({
           products={products}
           prodIndex={prodIndex}
           removeProduction={removeProduction}
+          onHover={onHover}
         />
       </div>
       <div className="trade">
         {trades.map((trade, index) => {
-          return (
-            <Vegetable
-              exchange={true}
-              deletable={true}
-              key={trade.id}
-              products={trade}
-              indexTrade={index}
-              removeTrade={removeTrade}
-            />
-          );
+          if (products.id === trade.prodId)
+            return (
+              <Vegetable
+                exchange={true}
+                deletable={true}
+                key={trade.id}
+                products={trade}
+                Tradeindex={index}
+                removeTrade={removeTrade}
+                onHover={onHover}
+                acceptedTrade={acceptedTrade}
+              />
+            );
         })}
       </div>
     </div>

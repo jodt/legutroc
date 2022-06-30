@@ -26,6 +26,10 @@ module.exports = sequelize => {
           key: 'id',
         },
       },
+      status: {
+        allowNull: true,
+        type: DataTypes.STRING,
+      },
       description: {
         allowNull: true,
         type: DataTypes.STRING,
