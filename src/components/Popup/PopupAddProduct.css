@@ -12,7 +12,7 @@
 .popupAddProduct {
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 80%;
@@ -47,6 +47,10 @@
 .allProducts .Vegetable img {
   width: 30px;
   height: 30px;
+}
+
+.allProducts::-webkit-scrollbar {
+  display: none;
 }
 
 .description {

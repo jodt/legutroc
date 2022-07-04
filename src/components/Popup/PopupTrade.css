@@ -39,7 +39,7 @@
   height: 35%;
   display: flex;
   justify-content: flex-start;
-  align-content: flex-start;
+  align-content: center;
   flex-wrap: wrap;
   margin-top: 60px;
   border: solid 1px black;
@@ -104,6 +104,10 @@
   opacity: 0.5;
 }*/
 
+.popupTrade .results::-webkit-scrollbar {
+  display: none;
+}
+
 .popupTrade .tradeAllReadyExist {
   position: absolute;
   display: flex;
@@ -127,7 +131,6 @@
     margin: 20px;
   }
   .popupTrade .results {
-    height: 21%;
     width: 80%;
   }
 }
