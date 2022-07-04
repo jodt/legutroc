@@ -36,7 +36,7 @@ export function Login({ onlogin, userPropriety }) {
       type: 'email',
       name: 'email',
       placeholder: 'Email',
-      pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]{2,3}$',
+      pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[.][a-zA-Z0-9-.]{2,3}$',
       onChange: handleChange,
     },
     {
@@ -54,7 +54,7 @@ export function Login({ onlogin, userPropriety }) {
   return (
     <div className="loginPage">
       <div className="loginHeader">
-        <h1>LEGU'TROC</h1>
+        <h1>Légu'Troc</h1>
       </div>
       <div className="login">
         <Form

@@ -1,13 +1,21 @@
 import React from 'react';
 import './Form.css';
 
-export function Form({ formFields, onSubmit, id, checkpassword, required }) {
+export function Form({
+  formFields,
+  onSubmit,
+  id,
+  checkpassword,
+  required,
+  children,
+}) {
   return (
     <form onSubmit={onSubmit}>
       {formFields.map((field, index) => {
         return (
           <React.Fragment key={index}>
             {field.id && <label htmlFor={field.id}>{field.label}</label>}
+            {children}
             <input
               required={required}
               autoComplete="off"

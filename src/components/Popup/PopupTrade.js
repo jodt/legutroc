@@ -7,6 +7,8 @@ import { Vegetable } from '../Vegetable/Vegetable';
 import { postTrade } from '../../api/trades/postTrade';
 import { checkIfTradeExist } from '../../api/trades/checkIfTradeExist';
 import './PopupTrade.css';
+import '../../animations/animation.css';
+import { inAnimation, outAnimation } from '../../animations/constants';
 
 export function PopupTrade({
   productions,
@@ -186,7 +188,13 @@ export function PopupTrade({
                 isSelected={vegetable1ForTrade.productId}
               >
                 {vegetableInfos.userfirstName ? (
-                  <div key={index} className="productInfos">
+                  <div
+                    key={index}
+                    className="productInfos"
+                    style={
+                      vegetableInfos.description ? inAnimation : outAnimation
+                    }
+                  >
                     <p>{vegetableInfos.userfirstName}</p>
                     <p>{vegetableInfos.userlastName}</p>
                     <p>{vegetableInfos.userCIty}</p>

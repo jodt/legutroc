@@ -23,7 +23,7 @@ export function Register() {
   useEffect(() => {
     if (statusCode.code === 201) {
       setOnRegister(true);
-      const timer = setTimeout(() => navigate('/'), 2000);
+      const timer = setTimeout(() => navigate('/home'), 2000);
       return () => {
         clearTimeout(timer);
       };
@@ -110,7 +110,7 @@ export function Register() {
       label: 'Email :',
       type: 'email',
       value: profile.email,
-      pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]{2,3}$',
+      pattern: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[.][a-zA-Z0-9-.]{2,3}$',
       onChange: handleChange,
     },
     {

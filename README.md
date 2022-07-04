@@ -119,7 +119,14 @@ You can now use the app !
 
 ## Front-end
 
-More details on the front-end part of the app...
+The dashboard allows you to see your products and the exchange proposals received. You can use the buttons to add products or offer exchanges in turn
+![Dashboard page](https://zupimages.net/up/22/26/omr2.png)
+
+The "Ajouter un produit" page allows you to add a product from your harvest with a description if necessary
+![Addproduct page](https://zupimages.net/up/22/26/kfsl.png)
+
+The "Proposer un échange" page allows you to search, by city, by product name, for both or all of the available products, the products that interest you and to offer an exchange for a product from your harvest.
+![Trade page](https://zupimages.net/up/22/26/trp1.png)
 
 ## Back-end
 
