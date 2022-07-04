@@ -48,6 +48,7 @@
   width: 30px;
   height: 30px;
 }
+
 .description {
   width: 90%;
   height: 35%;
@@ -59,6 +60,16 @@
 
 .description label {
   font-size: 1.2rem;
+}
+.description form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.description form input[type='submit'] {
+  width: 30%;
+  height: auto;
 }
 .description .menuButton {
   width: 30%;
@@ -89,7 +100,7 @@
 @media only screen and (max-width: 1024px) {
   .popupAddProduct {
     max-width: 350px;
-    /*height: 500px;*/
+    max-height: 600px;
   }
   .Dashboard .popupAddProduct h1 {
     font-size: 1rem;

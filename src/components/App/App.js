@@ -7,6 +7,7 @@ import { Register } from '../../Pages/Register/Register';
 import { UserContext } from '../../contexts/userContext';
 import { MyAccount } from '../../Pages/MyAccount/MyAccount';
 import { Mytrades } from '../../Pages/MyTrades/Mytrades';
+import LandingPage from '../../Pages/LandingPage/LandingPage';
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);
@@ -42,14 +43,15 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route
+          index
+          element={
+            <LandingPage />
+            /*<Login onlogin={handlelogin} userPropriety={userPropriety} />*/
+          }
+        />
         {!isLogin && (
           <>
-            <Route
-              index
-              element={
-                <Login onlogin={handlelogin} userPropriety={userPropriety} />
-              }
-            />
             <Route
               path="home"
               element={
@@ -89,7 +91,7 @@ function App() {
         )}
         <Route
           path="*"
-          element={<Navigate to={isLogin ? 'dashboard' : '/'} />}
+          element={<Navigate to={isLogin ? 'dashboard' : '/home'} />}
         />
       </Routes>
     </div>

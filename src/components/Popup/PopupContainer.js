@@ -56,7 +56,7 @@ export function PopupContainer({
   const addDescription = () => {
     setvegetableSelected(prev => ({
       ...prev,
-      description: vegetableDescription,
+      description: vegetableDescription || 'Pas de description',
     }));
   };
   return (

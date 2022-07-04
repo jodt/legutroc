@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../Button/Button';
+import { Form } from '../Form/Form';
 import { Vegetable } from '../Vegetable/Vegetable';
 import './PopupAddProduct.css';
 
@@ -13,6 +13,13 @@ export function PopupAddProduct({
   isSelectedId,
   children,
 }) {
+  const formFields = [
+    {
+      type: 'submit',
+      value: 'Valider',
+    },
+  ];
+
   return (
     <>
       <h1>Ajouter un produit</h1>
@@ -38,20 +45,16 @@ export function PopupAddProduct({
         })}
       </div>
       <div className="description">
-        <label> Description</label>
-        <textarea
-          className="textaera"
-          rows="5"
-          cols="50"
-          value={vegetableDescription}
-          onChange={onchange}
-        ></textarea>
-        <Button
-          name={'valider'}
-          nameButton={'Valider'}
-          onclick={addDescription}
-          disabled={errorMessage}
-        />
+        <Form formFields={formFields} onSubmit={addDescription} required={true}>
+          <label>Description</label>
+          <textarea
+            className="textaera"
+            rows="5"
+            cols="50"
+            value={vegetableDescription}
+            onChange={onchange}
+          ></textarea>
+        </Form>
       </div>
     </>
   );

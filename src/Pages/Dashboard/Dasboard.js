@@ -12,6 +12,8 @@ import { TradesBar } from '../../components/TradesBar/TradesBar';
 import { UserContext } from '../../contexts/userContext';
 import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
+import '../../animations/animation.css';
+import { inAnimation, outAnimation } from '../../animations/constants';
 
 export function Dashboard({ onlogout }) {
   const user = useContext(UserContext);
@@ -23,6 +25,7 @@ export function Dashboard({ onlogout }) {
   const [tradeIdToClear, setTradeIdToClear] = useState(null);
   const [vegetableInfos, setVegetableInfos] = useState({
     userfirstName: '',
+    userlastName: '',
     userCIty: '',
     description: '',
   });
@@ -114,6 +117,7 @@ export function Dashboard({ onlogout }) {
     setVegetableInfos(prev => ({
       ...prev,
       userfirstName: '',
+      userlastName: '',
       userCIty: '',
       description: '',
     }));
@@ -148,11 +152,13 @@ export function Dashboard({ onlogout }) {
   };
 
   const removeTrade = targetIndex => {
+    clearVegetableInfos();
     setTradeIdToClear(trades[targetIndex].id);
     setTrades(prev => prev.filter((item, index) => index !== targetIndex));
   };
 
   const tradeAccepted = targetIndex => {
+    clearVegetableInfos();
     acceptedTrade(trades[targetIndex].id).then(response => {
       if (response === 200) {
         setIdProdStatusChange(trades[targetIndex].prodId);
@@ -197,7 +203,7 @@ export function Dashboard({ onlogout }) {
         />
       )}
       <div className="DashboardHeader">
-        <h1>Bonjour {user.firstName} et Bienvenue sur votre jardin</h1>
+        <h1>Bonjour {user.firstName} et Bienvenue dans votre jardin</h1>
       </div>
       <div className="body">
         <div className="aside">
@@ -225,7 +231,11 @@ export function Dashboard({ onlogout }) {
             <h2>Informations</h2>
             <div className="infoContent">
               {vegetableInfos && !popUp.display ? (
-                <>
+                <div
+                  style={
+                    vegetableInfos.description ? inAnimation : outAnimation
+                  }
+                >
                   {vegetableInfos.userfirstName && (
                     <p>{vegetableInfos.userfirstName}</p>
                   )}
@@ -234,7 +244,7 @@ export function Dashboard({ onlogout }) {
                   )}
                   {vegetableInfos.userCIty && <p>{vegetableInfos.userCIty}</p>}
                   <p>{vegetableInfos.description}</p>
-                </>
+                </div>
               ) : (
                 ''
               )}
