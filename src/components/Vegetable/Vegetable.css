@@ -1,0 +1,87 @@
+.Vegetable {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+  margin-left: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 25px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+  flex: none;
+}
+
+.Vegetable button {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  bottom: -10px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: white;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.Vegetable p {
+  text-align: center;
+  margin: 0;
+}
+
+.delete {
+  background-color: #c93404;
+  right: -5px;
+}
+.accept {
+  background-color: #017d5e;
+  bottom: -10px;
+  left: -5px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .Vegetable {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+  }
+
+  .Vegetable img {
+    width: 30px;
+    height: 30px;
+  }
+  .Vegetable p {
+    margin: 0;
+  }
+
+  .Vegetable button {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .Vegetable {
+    width: 55px;
+    height: 55px;
+    border-radius: 5px;
+  }
+
+  .Vegetable img {
+    width: 15px;
+    height: 15px;
+  }
+  .Vegetable p {
+    margin: 0;
+  }
+
+  .Vegetable button {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+}

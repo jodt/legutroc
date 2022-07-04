@@ -1,0 +1,36 @@
+.myaccount {
+  content: '';
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.myaccount .formBox {
+  width: 30%;
+  max-width: 500px;
+  min-width: 300px;
+  height: 30vh;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myaccount .formBox .userInfos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.myaccount .formBox .userInfos span {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.myaccount .formBox .userInfos p {
+  font-size: 1.3rem;
+}

@@ -1,0 +1,62 @@
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('pngegg.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 70rem;
+}
+
+.loginHeader {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(1.5rem + 2vmin);
+}
+
+.login {
+  margin: auto;
+  height: 400px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+  background-color: hwb(0 100% 0% / 0.765);
+  border-radius: 25% 10%;
+  box-shadow: 10px 20px 80px #4c8665;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registerLink {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  margin-bottom: 30px;
+  color: #434343;
+}
+.registerLink:hover {
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 1024px) {
+  .login {
+    width: 80%;
+    max-width: 400px;
+    height: 50vh;
+    max-height: 500px;
+  }
+
+  .loginHeader h1 {
+    font-size: 3rem;
+  }
+}

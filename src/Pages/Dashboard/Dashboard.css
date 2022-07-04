@@ -1,0 +1,204 @@
+.Dashboard {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Dashboard h1 {
+  margin: 3rem;
+}
+
+.DashboardHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.Dashboard .body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+}
+.Dashboard .body .DashboardlPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 70%;
+  height: 80vh;
+  border-radius: 50px;
+  overflow-y: scroll;
+}
+
+.Dashboard .body .DashboardlPanel::-webkit-scrollbar {
+  display: none;
+}
+
+.Dashboard .body .aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 25%;
+  height: 80vh;
+}
+.Dashboard .body .aside .Menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+}
+
+.Dashboard .body .aside .Menu .menuButton:hover {
+  border: solid 1px #55ad75;
+}
+
+.Dashboard .body .aside .informations {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+}
+
+.Dashboard .body .aside .informations h2 {
+  margin: 0;
+}
+
+.informations .infoContent {
+  width: 80%;
+  height: 75%;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 5px 10px 20px rgba(92, 137, 105, 0.5);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+.informations .infoContent p {
+  margin: 5px;
+}
+.title {
+  width: 100%;
+  font-size: calc(0.5rem + 1vmin);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5%;
+}
+.maProduction {
+  width: 200px;
+  margin: 0 10px;
+}
+.mesPropositions {
+  margin: 0 10px;
+  width: 75%;
+}
+/*@media only screen and (max-width: 1440px) {
+  .Dashboard h1 {
+    font-size: 2rem;
+  }
+  .informations .infoContent {
+    height: 60%;
+  }
+  .informations .infoContent {
+    height: 70%;
+    font-size: 1.2rem;
+  }
+}*/
+@media only screen and (max-width: 1024px) {
+  .Dashboard {
+    justify-content: flex-start;
+  }
+  .Dashboard h1 {
+    margin: 15px;
+  }
+  .Dashboard .body {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .Dashboard .body .aside {
+    flex-direction: row;
+    width: 90%;
+    height: 50%;
+  }
+  .Dashboard .body h2 {
+    font-size: 1rem;
+  }
+  .Dashboard .body .aside .informations,
+  .Dashboard .body .aside .Menu {
+    width: 45%;
+    height: 95%;
+  }
+  .Dashboard .body .aside .informations {
+    justify-content: center;
+  }
+  .Dashboard .body .aside .Menu .menuButton {
+    font-size: 1rem;
+    line-height: 10px;
+  }
+  .informations .infoContent {
+    height: 70%;
+    font-size: 1rem;
+  }
+  .Dashboard .body .DashboardlPanel {
+    width: 90%;
+    height: 40%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .Dashboard {
+    justify-content: flex-start;
+  }
+  .Dashboard h1 {
+    margin: 15px;
+  }
+  .Dashboard .body {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .Dashboard .body .aside {
+    flex-direction: row;
+    width: 90%;
+    height: 50%;
+  }
+  .Dashboard .body h2 {
+    font-size: 1rem;
+  }
+  .Dashboard .body .aside .informations,
+  .Dashboard .body .aside .Menu {
+    width: 45%;
+    height: 95%;
+  }
+  .Dashboard .body .aside .Menu .menuButton {
+    font-size: 0.7rem;
+    line-height: 10px;
+  }
+  .informations .infoContent {
+    height: 70%;
+    font-size: 1rem;
+  }
+  .Dashboard .body .DashboardlPanel {
+    width: 90%;
+    height: 45%;
+  }
+}

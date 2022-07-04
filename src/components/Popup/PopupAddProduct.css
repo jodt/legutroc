@@ -1,0 +1,145 @@
+.popupBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: #00000050;
+  z-index: 10;
+}
+
+.popupAddProduct {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  max-width: 800px;
+  height: 80vh;
+  background-color: white;
+  border-radius: 50px;
+}
+.popupAddProduct .errorMessage {
+  position: absolute;
+  top: 100px;
+  margin: 0;
+}
+.allProducts {
+  width: 80%;
+  height: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  border: solid 1px black;
+  border-radius: 25px;
+  overflow-y: scroll;
+}
+
+.allProducts .Vegetable {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.allProducts .Vegetable img {
+  width: 30px;
+  height: 30px;
+}
+
+.allProducts::-webkit-scrollbar {
+  display: none;
+}
+
+.description {
+  width: 90%;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.description label {
+  font-size: 1.2rem;
+}
+.description form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.description form input[type='submit'] {
+  width: 30%;
+  height: auto;
+}
+.description .menuButton {
+  width: 30%;
+  height: 50px;
+  font-size: 1.2rem;
+  font-family: 'Cairo', sans-serif;
+  background-color: #a6fcca;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.description textarea:focus {
+  outline: none;
+}
+
+@media only screen and (max-height: 850px) and (max-width: 1440px) {
+  .popupAddProduct .errorMessage {
+    position: absolute;
+    top: 48px;
+    font-size: 1rem;
+  }
+  .Dashboard .popupAddProduct h1 {
+    font-size: 1.5rem;
+    margin: 20px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .popupAddProduct {
+    max-width: 350px;
+    max-height: 600px;
+  }
+  .Dashboard .popupAddProduct h1 {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  .allProducts {
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .allProducts .Vegetable {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .allProducts .Vegetable p {
+    font-size: 0.7rem;
+  }
+
+  .allProducts .Vegetable img {
+    width: 20px;
+    height: 20px;
+  }
+  .textaera {
+    width: 90%;
+  }
+  .popupAddProduct .menuButton {
+    margin-top: 10px;
+    height: 40px;
+    width: 65px;
+  }
+
+  .popupAddProduct .errorMessage {
+    position: absolute;
+    top: 35px;
+    font-size: 0.8rem;
+  }
+}
