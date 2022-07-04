@@ -55,4 +55,8 @@
     height: 50vh;
     max-height: 500px;
   }
+
+  .loginHeader h1 {
+    font-size: 3rem;
+  }
 }
